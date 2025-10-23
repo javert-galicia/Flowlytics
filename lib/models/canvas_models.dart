@@ -186,3 +186,144 @@ class BusinessModelCanvas {
     }
   }
 }
+
+// Team Canvas Model
+class TeamCanvas {
+  final List<String> people;
+  final List<String> activities;
+  final List<String> personalGoals;
+  final List<String> purpose;
+  final List<String> rules;
+  final List<String> skills;
+  final List<String> tools;
+  final List<String> network;
+  final List<String> values;
+
+  const TeamCanvas({
+    required this.people,
+    required this.activities,
+    required this.personalGoals,
+    required this.purpose,
+    required this.rules,
+    required this.skills,
+    required this.tools,
+    required this.network,
+    required this.values,
+  });
+
+  TeamCanvas copyWith({
+    List<String>? people,
+    List<String>? activities,
+    List<String>? personalGoals,
+    List<String>? purpose,
+    List<String>? rules,
+    List<String>? skills,
+    List<String>? tools,
+    List<String>? network,
+    List<String>? values,
+  }) {
+    return TeamCanvas(
+      people: people ?? this.people,
+      activities: activities ?? this.activities,
+      personalGoals: personalGoals ?? this.personalGoals,
+      purpose: purpose ?? this.purpose,
+      rules: rules ?? this.rules,
+      skills: skills ?? this.skills,
+      tools: tools ?? this.tools,
+      network: network ?? this.network,
+      values: values ?? this.values,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'people': people,
+      'activities': activities,
+      'personalGoals': personalGoals,
+      'purpose': purpose,
+      'rules': rules,
+      'skills': skills,
+      'tools': tools,
+      'network': network,
+      'values': values,
+    };
+  }
+
+  factory TeamCanvas.fromJson(Map<String, dynamic> json) {
+    return TeamCanvas(
+      people: List<String>.from(json['people'] ?? []),
+      activities: List<String>.from(json['activities'] ?? []),
+      personalGoals: List<String>.from(json['personalGoals'] ?? []),
+      purpose: List<String>.from(json['purpose'] ?? []),
+      rules: List<String>.from(json['rules'] ?? []),
+      skills: List<String>.from(json['skills'] ?? []),
+      tools: List<String>.from(json['tools'] ?? []),
+      network: List<String>.from(json['network'] ?? []),
+      values: List<String>.from(json['values'] ?? []),
+    );
+  }
+
+  static TeamCanvas empty() {
+    return const TeamCanvas(
+      people: [],
+      activities: [],
+      personalGoals: [],
+      purpose: [],
+      rules: [],
+      skills: [],
+      tools: [],
+      network: [],
+      values: [],
+    );
+  }
+
+  List<String> getContentById(String id) {
+    switch (id) {
+      case 'people':
+        return people;
+      case 'activities':
+        return activities;
+      case 'personalGoals':
+        return personalGoals;
+      case 'purpose':
+        return purpose;
+      case 'rules':
+        return rules;
+      case 'skills':
+        return skills;
+      case 'tools':
+        return tools;
+      case 'network':
+        return network;
+      case 'values':
+        return values;
+      default:
+        return [];
+    }
+  }
+
+  TeamCanvas updateById(String id, List<String> content) {
+    switch (id) {
+      case 'people':
+        return copyWith(people: content);
+      case 'activities':
+        return copyWith(activities: content);
+      case 'personalGoals':
+        return copyWith(personalGoals: content);
+      case 'purpose':
+        return copyWith(purpose: content);
+      case 'rules':
+        return copyWith(rules: content);
+      case 'skills':
+        return copyWith(skills: content);
+      case 'tools':
+        return copyWith(tools: content);
+      case 'network':
+        return copyWith(network: content);
+      case 'values':
+        return copyWith(values: content);
+      default:
+        return this;
+    }
+  }
+}

@@ -1,6 +1,6 @@
-# Business Model Canvas - Flutter App
+# Flowlytics
 
-Una aplicación Flutter que permite crear y gestionar un Business Model Canvas interactivo.
+Una aplicación Flutter que permite crear y gestionar herramientas de análisis empresarial como Business Model Canvas, FODA y Value Proposition Canvas.
 
 ## Características
 
@@ -38,7 +38,7 @@ Una aplicación Flutter que permite crear y gestionar un Business Model Canvas i
 
 1. **Instalar dependencias**:
    ```bash
-   cd bmc_flutter
+   cd flowlytics
    flutter pub get
    ```
 

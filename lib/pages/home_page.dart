@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'business_model_canvas_page.dart';
 import 'foda_analysis_page.dart';
 import 'value_proposition_canvas_page.dart';
+import 'team_canvas_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -129,6 +130,23 @@ class HomePage extends StatelessWidget {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const ValuePropositionCanvasPage()),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    _buildToolCard(
+                      context,
+                      title: 'Team Canvas',
+                      subtitle: 'Define la estructura y dinámicas de tu equipo',
+                      description: 'Herramienta para alinear equipos definiendo roles, propósito y formas de trabajo',
+                      icon: Icons.groups,
+                      gradient: LinearGradient(
+                        colors: [Colors.teal.shade400, Colors.green.shade400],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const TeamCanvasPage()),
                       ),
                     ),
                     ],
