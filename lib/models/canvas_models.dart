@@ -327,3 +327,89 @@ class TeamCanvas {
     }
   }
 }
+
+// Idea Napkin Canvas Model
+class IdeaNapkinCanvas {
+  final String title;
+  final String shortDescription;
+  final String targetAudience;
+  final String innovationAspect;
+  final int businessValue;
+  final int innovationPower;
+  final int userValue;
+  final String sketchData; // Base64 encoded image data for the drawing
+
+  const IdeaNapkinCanvas({
+    required this.title,
+    required this.shortDescription,
+    required this.targetAudience,
+    required this.innovationAspect,
+    required this.businessValue,
+    required this.innovationPower,
+    required this.userValue,
+    required this.sketchData,
+  });
+
+  int get totalValue => businessValue + innovationPower + userValue;
+
+  IdeaNapkinCanvas copyWith({
+    String? title,
+    String? shortDescription,
+    String? targetAudience,
+    String? innovationAspect,
+    int? businessValue,
+    int? innovationPower,
+    int? userValue,
+    String? sketchData,
+  }) {
+    return IdeaNapkinCanvas(
+      title: title ?? this.title,
+      shortDescription: shortDescription ?? this.shortDescription,
+      targetAudience: targetAudience ?? this.targetAudience,
+      innovationAspect: innovationAspect ?? this.innovationAspect,
+      businessValue: businessValue ?? this.businessValue,
+      innovationPower: innovationPower ?? this.innovationPower,
+      userValue: userValue ?? this.userValue,
+      sketchData: sketchData ?? this.sketchData,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'shortDescription': shortDescription,
+      'targetAudience': targetAudience,
+      'innovationAspect': innovationAspect,
+      'businessValue': businessValue,
+      'innovationPower': innovationPower,
+      'userValue': userValue,
+      'sketchData': sketchData,
+    };
+  }
+
+  factory IdeaNapkinCanvas.fromJson(Map<String, dynamic> json) {
+    return IdeaNapkinCanvas(
+      title: json['title'] ?? '',
+      shortDescription: json['shortDescription'] ?? '',
+      targetAudience: json['targetAudience'] ?? '',
+      innovationAspect: json['innovationAspect'] ?? '',
+      businessValue: json['businessValue'] ?? 0,
+      innovationPower: json['innovationPower'] ?? 0,
+      userValue: json['userValue'] ?? 0,
+      sketchData: json['sketchData'] ?? '',
+    );
+  }
+
+  static IdeaNapkinCanvas empty() {
+    return const IdeaNapkinCanvas(
+      title: '',
+      shortDescription: '',
+      targetAudience: '',
+      innovationAspect: '',
+      businessValue: 0,
+      innovationPower: 0,
+      userValue: 0,
+      sketchData: '',
+    );
+  }
+}

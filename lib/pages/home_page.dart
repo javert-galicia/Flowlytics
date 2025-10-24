@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'business_model_canvas_page.dart';
 import 'foda_analysis_page.dart';
 import 'value_proposition_canvas_page.dart';
 import 'team_canvas_page.dart';
+import 'idea_napkin_canvas_page.dart';
+import '../widgets/app_navigation_drawer.dart';
+import '../theme/app_theme.dart';
+import '../l10n/app_localizations.dart';
+import '../providers/locale_provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,192 +16,307 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
+      backgroundColor: AppTheme.backgroundLight,
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: const BoxDecoration(
+                gradient: AppTheme.primaryGradient,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.analytics_outlined,
+                color: Colors.white,
+                size: 24,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Text(
+              'FLOWLYTICS',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontFamily: 'Lato',
+                fontWeight: FontWeight.w800,
+                fontSize: 20,
+                letterSpacing: 1.2,
+                color: AppTheme.gray900,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          PopupMenuButton<Locale>(
+            icon: const Icon(Icons.language),
+            onSelected: (Locale locale) {
+              final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
+              localeProvider.setLocale(locale);
+              
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(locale.languageCode == 'es' 
+                    ? 'Idioma cambiado a Español' 
+                    : 'Language changed to English'),
+                  duration: const Duration(seconds: 2),
+                ),
+              );
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<Locale>>[
+              const PopupMenuItem<Locale>(
+                value: Locale('es'),
+                child: Row(
+                  children: [
+                    Text('🇪🇸'),
+                    SizedBox(width: 8),
+                    Text('Español'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem<Locale>(
+                value: Locale('en'),
+                child: Row(
+                  children: [
+                    Text('🇺🇸'),
+                    SizedBox(width: 8),
+                    Text('English'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      drawer: const AppNavigationDrawer(selectedIndex: 0),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height - 
-                        MediaQuery.of(context).padding.top - 
-                        MediaQuery.of(context).padding.bottom - 48,
-            ),
-            child: IntrinsicHeight(
-              child: Column(
+          child: Column(
+            children: [
+              // Header con logo y título
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Header con logo y título
-                  Flexible(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                    Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Colors.blue.shade600, Colors.purple.shade600],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
+                  Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.blue.shade600, Colors.purple.shade600],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blue.shade200,
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
                         ),
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.blue.shade200,
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.business_center,
-                        size: 60,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    const Text(
-                      'Herramientas de\nAnálisis Empresarial',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                        height: 1.2,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Selecciona la herramienta que necesitas para tu análisis estratégico',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey.shade600,
-                        height: 1.4,
-                      ),
-                    ),
                       ],
                     ),
+                    child: const Icon(
+                      Icons.business_center,
+                      size: 60,
+                      color: Colors.white,
+                    ),
                   ),
-                  
-                  const SizedBox(height: 40),
-                  
-                  // Opciones principales
-                  Column(
-                    children: [
-                    _buildToolCard(
-                      context,
-                      title: 'Business Model Canvas',
-                      subtitle: 'Diseña y visualiza tu modelo de negocio',
-                      description: 'Herramienta completa para mapear los 9 bloques fundamentales de tu negocio',
-                      icon: Icons.dashboard_outlined,
-                      gradient: LinearGradient(
-                        colors: [Colors.blue.shade400, Colors.cyan.shade400],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const BusinessModelCanvasPage()),
-                      ),
+                  const SizedBox(height: 24),
+                  Text(
+                    AppLocalizations.of(context)!.businessToolsTitle,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      fontFamily: 'Lato',
+                      color: AppTheme.gray900,
+                      height: 1.2,
                     ),
-                    const SizedBox(height: 20),
-                    _buildToolCard(
-                      context,
-                      title: 'Análisis FODA',
-                      subtitle: 'Evalúa fortalezas, oportunidades, debilidades y amenazas',
-                      description: 'Matriz estratégica para analizar factores internos y externos de tu organización',
-                      icon: Icons.analytics_outlined,
-                      gradient: LinearGradient(
-                        colors: [Colors.purple.shade400, Colors.pink.shade400],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const FodaAnalysisPage()),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    _buildToolCard(
-                      context,
-                      title: 'Value Proposition Canvas',
-                      subtitle: 'Define tu propuesta de valor única',
-                      description: 'Herramienta visual para crear productos que los clientes realmente quieren',
-                      icon: Icons.track_changes,
-                      gradient: LinearGradient(
-                        colors: [Colors.orange.shade400, Colors.amber.shade400],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const ValuePropositionCanvasPage()),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    _buildToolCard(
-                      context,
-                      title: 'Team Canvas',
-                      subtitle: 'Define la estructura y dinámicas de tu equipo',
-                      description: 'Herramienta para alinear equipos definiendo roles, propósito y formas de trabajo',
-                      icon: Icons.groups,
-                      gradient: LinearGradient(
-                        colors: [Colors.teal.shade400, Colors.green.shade400],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const TeamCanvasPage()),
-                      ),
-                    ),
-                    ],
                   ),
+                  const SizedBox(height: 16),
+                  Text(
+                    AppLocalizations.of(context)!.selectToolSubtitle,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontSize: 16,
+                      fontFamily: 'Roboto',
+                      color: AppTheme.gray600,
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ),
+              
+              const SizedBox(height: 40),
                   
-                  const SizedBox(height: 40),
-                  
-                  // Footer
-                  Column(
-                    children: [
-                    Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Row(
+                  // Opciones principales - Grid responsivo con altura automática
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      double cardWidth;
+                      double spacing;
+
+                      if (constraints.maxWidth > 1200) {
+                        // Desktop: 3 columnas
+                        cardWidth = (constraints.maxWidth - 48) / 3; // 24px spacing each side
+                        spacing = 24;
+                      } else if (constraints.maxWidth > 900) {
+                        // Tablet grande: 3 columnas
+                        cardWidth = (constraints.maxWidth - 40) / 3; // 20px spacing
+                        spacing = 20;
+                      } else if (constraints.maxWidth > 600) {
+                        // Tablet: 2 columnas
+                        cardWidth = (constraints.maxWidth - 16) / 2; // 16px spacing
+                        spacing = 16;
+                      } else {
+                        // Móvil: 1 columna
+                        cardWidth = constraints.maxWidth;
+                        spacing = 16;
+                      }
+
+                      return Wrap(
+                        spacing: spacing,
+                        runSpacing: spacing,
                         children: [
-                          Icon(
-                            Icons.info_outline,
-                            color: Colors.grey.shade600,
-                            size: 20,
+                          SizedBox(
+                            width: cardWidth,
+                            child: _buildToolCard(
+                              context,
+                              title: AppLocalizations.of(context)!.businessModelCanvas,
+                              subtitle: AppLocalizations.of(context)!.businessModelCanvasSubtitle,
+                              description: AppLocalizations.of(context)!.businessModelCanvasDescription,
+                              icon: Icons.dashboard_outlined,
+                              gradient: LinearGradient(
+                                colors: [Colors.blue.shade400, Colors.cyan.shade400],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const BusinessModelCanvasPage()),
+                              ),
+                            ),
                           ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Text(
-                              'Todas las herramientas guardan tu progreso automáticamente',
-                              style: TextStyle(
-                                color: Colors.grey.shade600,
-                                fontSize: 14,
+                          SizedBox(
+                            width: cardWidth,
+                            child: _buildToolCard(
+                              context,
+                              title: AppLocalizations.of(context)!.fodaAnalysis,
+                              subtitle: AppLocalizations.of(context)!.fodaAnalysisSubtitle,
+                              description: AppLocalizations.of(context)!.fodaAnalysisDescription,
+                              icon: Icons.analytics_outlined,
+                              gradient: LinearGradient(
+                                colors: [Colors.purple.shade400, Colors.pink.shade400],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const FodaAnalysisPage()),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: cardWidth,
+                            child: _buildToolCard(
+                              context,
+                              title: AppLocalizations.of(context)!.valuePropositionCanvas,
+                              subtitle: AppLocalizations.of(context)!.valuePropositionCanvasSubtitle,
+                              description: AppLocalizations.of(context)!.valuePropositionCanvasDescription,
+                              icon: Icons.track_changes,
+                              gradient: LinearGradient(
+                                colors: [Colors.orange.shade400, Colors.amber.shade400],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const ValuePropositionCanvasPage()),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: cardWidth,
+                            child: _buildToolCard(
+                              context,
+                              title: AppLocalizations.of(context)!.teamCanvas,
+                              subtitle: AppLocalizations.of(context)!.teamCanvasSubtitle,
+                              description: AppLocalizations.of(context)!.teamCanvasDescription,
+                              icon: Icons.groups,
+                              gradient: LinearGradient(
+                                colors: [Colors.teal.shade400, Colors.green.shade400],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const TeamCanvasPage()),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: cardWidth,
+                            child: _buildToolCard(
+                              context,
+                              title: AppLocalizations.of(context)!.ideaNapkinCanvas,
+                              subtitle: AppLocalizations.of(context)!.ideaNapkinCanvasSubtitle,
+                              description: AppLocalizations.of(context)!.ideaNapkinCanvasDescription,
+                              icon: Icons.lightbulb_outline,
+                              gradient: LinearGradient(
+                                colors: [Colors.indigo.shade400, Colors.purple.shade400],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const IdeaNapkinCanvasPage()),
                               ),
                             ),
                           ),
                         ],
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Versión Flutter - Multiplataforma',
-                      style: TextStyle(
-                        color: Colors.grey.shade500,
-                        fontSize: 12,
-                      ),
-                    ),
-                    ],
+                      );
+                    },
                   ),
-                ],
+              
+              const SizedBox(height: 40),
+              
+              // Footer
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.info_outline,
+                      color: Colors.grey.shade600,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        AppLocalizations.of(context)!.autoSaveInfo,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontFamily: 'Roboto',
+                          color: AppTheme.gray600,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
+              const SizedBox(height: 16),
+              Text(
+                AppLocalizations.of(context)!.versionInfo,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  fontFamily: 'Roboto',
+                  color: AppTheme.gray500,
+                  fontSize: 12,
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -220,7 +341,7 @@ class HomePage extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
@@ -233,77 +354,91 @@ class HomePage extends StatelessWidget {
               width: 1,
             ),
           ),
-          child: Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               // Icono con gradiente
               Container(
-                width: 80,
-                height: 80,
+                width: 56,
+                height: 56,
                 decoration: BoxDecoration(
                   gradient: gradient,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(14),
                   boxShadow: [
                     BoxShadow(
                       color: gradient.colors.first.withOpacity(0.3),
-                      blurRadius: 12,
-                      offset: const Offset(0, 6),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
                     ),
                   ],
                 ),
                 child: Icon(
                   icon,
-                  size: 40,
+                  size: 28,
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(width: 20),
+              const SizedBox(height: 16),
               
               // Contenido
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Roboto',
+                      color: AppTheme.gray800,
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey.shade700,
-                      ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    subtitle,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Roboto',
+                      color: AppTheme.gray700,
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      description,
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.grey.shade600,
-                        height: 1.3,
-                      ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    description,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontSize: 11,
+                      fontFamily: 'Roboto',
+                      color: AppTheme.gray600,
+                      height: 1.3,
                     ),
-                  ],
-                ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
               
-              // Flecha
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 16,
-                  color: Colors.grey.shade600,
+              const SizedBox(height: 16),
+              
+              // Flecha en la esquina inferior derecha
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 12,
+                    color: Colors.grey.shade600,
+                  ),
                 ),
               ),
             ],

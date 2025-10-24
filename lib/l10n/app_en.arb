@@ -1,0 +1,86 @@
+{
+  "appTitle": "Flowlytics - Business Analysis Tools",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "businessToolsTitle": "Business Analysis\nTools",
+  "@businessToolsTitle": {
+    "description": "Main title on homepage"
+  },
+  "selectToolSubtitle": "Select the tool you need for your strategic analysis",
+  "@selectToolSubtitle": {
+    "description": "Subtitle on homepage"
+  },
+  "businessModelCanvas": "Business Model Canvas",
+  "@businessModelCanvas": {
+    "description": "Business Model Canvas tool name"
+  },
+  "businessModelCanvasSubtitle": "Design and visualize your business model",
+  "@businessModelCanvasSubtitle": {
+    "description": "Business Model Canvas subtitle"
+  },
+  "businessModelCanvasDescription": "Complete tool to map the 9 fundamental blocks of your business",
+  "@businessModelCanvasDescription": {
+    "description": "Business Model Canvas description"
+  },
+  "fodaAnalysis": "SWOT Analysis",
+  "@fodaAnalysis": {
+    "description": "SWOT Analysis tool name"
+  },
+  "fodaAnalysisSubtitle": "Evaluate strengths, opportunities, weaknesses and threats",
+  "@fodaAnalysisSubtitle": {
+    "description": "SWOT Analysis subtitle"
+  },
+  "fodaAnalysisDescription": "Strategic matrix to analyze internal and external factors of your organization",
+  "@fodaAnalysisDescription": {
+    "description": "SWOT Analysis description"
+  },
+  "valuePropositionCanvas": "Value Proposition Canvas",
+  "@valuePropositionCanvas": {
+    "description": "Value Proposition Canvas tool name"
+  },
+  "valuePropositionCanvasSubtitle": "Define your unique value proposition",
+  "@valuePropositionCanvasSubtitle": {
+    "description": "Value Proposition Canvas subtitle"
+  },
+  "valuePropositionCanvasDescription": "Visual tool to create products that customers really want",
+  "@valuePropositionCanvasDescription": {
+    "description": "Value Proposition Canvas description"
+  },
+  "teamCanvas": "Team Canvas",
+  "@teamCanvas": {
+    "description": "Team Canvas tool name"
+  },
+  "teamCanvasSubtitle": "Define the structure and dynamics of your team",
+  "@teamCanvasSubtitle": {
+    "description": "Team Canvas subtitle"
+  },
+  "teamCanvasDescription": "Tool to align teams by defining roles, purpose and ways of working",
+  "@teamCanvasDescription": {
+    "description": "Team Canvas description"
+  },
+  "ideaNapkinCanvas": "Idea Napkin Canvas",
+  "@ideaNapkinCanvas": {
+    "description": "Idea Napkin Canvas tool name"
+  },
+  "ideaNapkinCanvasSubtitle": "Capture and validate your business ideas",
+  "@ideaNapkinCanvasSubtitle": {
+    "description": "Idea Napkin Canvas subtitle"
+  },
+  "ideaNapkinCanvasDescription": "Simple tool to structure ideas with value formula and sketch",
+  "@ideaNapkinCanvasDescription": {
+    "description": "Idea Napkin Canvas description"
+  },
+  "autoSaveInfo": "All tools automatically save your progress",
+  "@autoSaveInfo": {
+    "description": "Information about auto-save feature"
+  },
+  "versionInfo": "Flutter Version - Multiplatform",
+  "@versionInfo": {
+    "description": "Version information"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Home navigation item"
+  }
+}

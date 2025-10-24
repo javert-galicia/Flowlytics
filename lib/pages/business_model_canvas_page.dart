@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../models/canvas_models.dart';
 import '../widgets/canvas_section.dart';
+import '../widgets/app_navigation_drawer.dart';
 
 class BusinessModelCanvasPage extends StatefulWidget {
   const BusinessModelCanvasPage({super.key});
@@ -569,6 +570,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
+      drawer: const AppNavigationDrawer(selectedIndex: 1),
       appBar: AppBar(
         title: const Text(
           'Business Model Canvas',

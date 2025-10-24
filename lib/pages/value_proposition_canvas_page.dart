@@ -4,6 +4,7 @@ import 'dart:convert';
 import '../models/value_proposition_models.dart';
 import '../models/canvas_models.dart';
 import '../widgets/canvas_section.dart';
+import '../widgets/app_navigation_drawer.dart';
 
 class ValuePropositionCanvasPage extends StatefulWidget {
   const ValuePropositionCanvasPage({super.key});
@@ -504,6 +505,7 @@ class _ValuePropositionCanvasPageState extends State<ValuePropositionCanvasPage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
+      drawer: const AppNavigationDrawer(selectedIndex: 3),
       appBar: AppBar(
         title: const Text(
           'Value Proposition Canvas',

@@ -4,6 +4,7 @@ import 'dart:convert';
 import '../models/canvas_models.dart';
 import '../widgets/team_canvas_section.dart';
 import '../widgets/team_canvas_grid_section.dart';
+import '../widgets/app_navigation_drawer.dart';
 
 class TeamCanvasPage extends StatefulWidget {
   const TeamCanvasPage({super.key});
@@ -145,6 +146,7 @@ class _TeamCanvasPageState extends State<TeamCanvasPage> {
 
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
+      drawer: const AppNavigationDrawer(selectedIndex: 4),
       appBar: AppBar(
         title: const Text(
           'Team Canvas',

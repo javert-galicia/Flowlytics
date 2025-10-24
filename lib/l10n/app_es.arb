@@ -1,0 +1,23 @@
+{
+  "appTitle": "Flowlytics - Herramientas de Análisis Empresarial",
+  "businessToolsTitle": "Herramientas de\nAnálisis Empresarial",
+  "selectToolSubtitle": "Selecciona la herramienta que necesitas para tu análisis estratégico",
+  "businessModelCanvas": "Business Model Canvas",
+  "businessModelCanvasSubtitle": "Diseña y visualiza tu modelo de negocio",
+  "businessModelCanvasDescription": "Herramienta completa para mapear los 9 bloques fundamentales de tu negocio",
+  "fodaAnalysis": "Análisis FODA",
+  "fodaAnalysisSubtitle": "Evalúa fortalezas, oportunidades, debilidades y amenazas",
+  "fodaAnalysisDescription": "Matriz estratégica para analizar factores internos y externos de tu organización",
+  "valuePropositionCanvas": "Value Proposition Canvas",
+  "valuePropositionCanvasSubtitle": "Define tu propuesta de valor única",
+  "valuePropositionCanvasDescription": "Herramienta visual para crear productos que los clientes realmente quieren",
+  "teamCanvas": "Team Canvas",
+  "teamCanvasSubtitle": "Define la estructura y dinámicas de tu equipo",
+  "teamCanvasDescription": "Herramienta para alinear equipos definiendo roles, propósito y formas de trabajo",
+  "ideaNapkinCanvas": "Idea Napkin Canvas",
+  "ideaNapkinCanvasSubtitle": "Captura y valida tus ideas de negocio",
+  "ideaNapkinCanvasDescription": "Herramienta simple para estructurar ideas con fórmula de valor y sketch",
+  "autoSaveInfo": "Todas las herramientas guardan tu progreso automáticamente",
+  "versionInfo": "Versión Flutter - Multiplataforma",
+  "home": "Inicio"
+}

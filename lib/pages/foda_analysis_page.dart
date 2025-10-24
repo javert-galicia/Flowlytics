@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../models/foda_models.dart';
 import '../widgets/foda_section.dart';
+import '../widgets/app_navigation_drawer.dart';
 
 class FodaAnalysisPage extends StatefulWidget {
   const FodaAnalysisPage({super.key});
@@ -413,6 +414,7 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
+      drawer: const AppNavigationDrawer(selectedIndex: 2),
       appBar: AppBar(
         title: const Text(
           'Análisis FODA',
