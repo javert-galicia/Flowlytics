@@ -29,6 +29,9 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
   bool _isDrawing = false;
   Timer? _saveTimer;
   bool _showSaveMessage = false;
+  bool _isDrawingInCanvas = false;
+  bool _isScrollLocked = false;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -45,6 +48,7 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
     _businessValueController.dispose();
     _innovationPowerController.dispose();
     _userValueController.dispose();
+    _scrollController.dispose();
     _saveTimer?.cancel();
     super.dispose();
   }
@@ -170,6 +174,25 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
     _saveCanvas(showMessage: false);
   }
 
+  void _toggleScrollLock() {
+    setState(() {
+      _isScrollLocked = !_isScrollLocked;
+    });
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          _isScrollLocked 
+            ? 'Scroll bloqueado - Ideal para dibujar' 
+            : 'Scroll desbloqueado - Navegación normal'
+        ),
+        duration: const Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: _isScrollLocked ? Colors.orange : Colors.green,
+      ),
+    );
+  }
+
   Future<void> _clearCanvas() async {
     final confirm = await showDialog<bool>(
       context: context,
@@ -222,10 +245,19 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
         ],
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
+        child: NotificationListener<ScrollNotification>(
+          onNotification: (notification) {
+            // Bloquear scroll si está activado el lock o si se está dibujando
+            return _isScrollLocked || _isDrawingInCanvas;
+          },
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            physics: (_isScrollLocked || _isDrawingInCanvas) 
+                ? const NeverScrollableScrollPhysics() 
+                : const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.all(16),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
               final isWide = constraints.maxWidth > 768;
               
               return Column(
@@ -287,7 +319,7 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
           ),
         ),
       ),
-    );
+    ));
   }
 
   Widget _buildWideLayout() {
@@ -525,69 +557,177 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
   }
 
   Widget _buildSketchSection() {
-    return _buildSection(
-      title: 'Idea Sketch',
-      icon: Icons.draw_outlined,
-      color: Colors.indigo,
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: double.infinity,
-            height: 300,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.grey.shade300),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: GestureDetector(
-                onPanStart: (details) {
-                  setState(() {
-                    _isDrawing = true;
-                    _points.add(details.localPosition);
-                  });
-                },
-                onPanUpdate: (details) {
-                  if (_isDrawing) {
-                    setState(() {
-                      _points.add(details.localPosition);
-                    });
-                  }
-                },
-                onPanEnd: (details) {
-                  setState(() {
-                    _isDrawing = false;
-                    _points.add(Offset.infinite);
-                  });
-                  _saveSketchToCanvas();
-                  _saveCanvas(showMessage: false);
-                },
-                child: CustomPaint(
-                  painter: SketchPainter(_points),
-                  size: Size.infinite,
+          // Título personalizado con botón
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.indigo.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Icon(Icons.draw_outlined, color: Colors.indigo, size: 20),
+              ),
+              const SizedBox(width: 12),
+              const Expanded(
+                child: Text(
+                  'Idea Sketch',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.indigo,
+                  ),
                 ),
               ),
-            ),
-          ),
-          const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton.icon(
-                onPressed: _clearSketch,
-                icon: const Icon(Icons.clear),
-                label: const Text('Limpiar Dibujo'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red.shade50,
-                  foregroundColor: Colors.red.shade700,
+              // Botón de bloqueo/desbloqueo junto al título
+              Container(
+                decoration: BoxDecoration(
+                  color: _isScrollLocked ? Colors.orange.shade50 : Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: _isScrollLocked ? Colors.orange.shade200 : Colors.blue.shade200,
+                  ),
+                ),
+                child: IconButton(
+                  icon: Icon(_isScrollLocked ? Icons.lock : Icons.lock_open),
+                  tooltip: _isScrollLocked ? 'Desbloquear scroll' : 'Bloquear scroll',
+                  onPressed: _toggleScrollLock,
+                  color: _isScrollLocked ? Colors.orange.shade700 : Colors.blue.shade700,
+                  iconSize: 20,
                 ),
               ),
             ],
           ),
-        ],
-      ),
-    );
+          const SizedBox(height: 16),
+            Column(
+              children: [
+                // Indicador de estado del scroll
+                if (_isScrollLocked)
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    margin: const EdgeInsets.only(bottom: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.orange.shade50,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.orange.shade200),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.lock, color: Colors.orange.shade700, size: 16),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            'Scroll bloqueado - Modo dibujo activo',
+                            style: TextStyle(
+                              color: Colors.orange.shade700,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                Container(
+                  width: double.infinity,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.grey.shade300),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: GestureDetector(
+                      onTapDown: (details) {
+                        setState(() {
+                          _isDrawingInCanvas = true;
+                        });
+                      },
+                      onTapUp: (details) {
+                        if (!_isDrawing) {
+                          setState(() {
+                            _isDrawingInCanvas = false;
+                          });
+                        }
+                      },
+                      onTapCancel: () {
+                        if (!_isDrawing) {
+                          setState(() {
+                            _isDrawingInCanvas = false;
+                          });
+                        }
+                      },
+                      onPanStart: (details) {
+                        setState(() {
+                          _isDrawing = true;
+                          _isDrawingInCanvas = true;
+                          _points.add(details.localPosition);
+                        });
+                      },
+                      onPanUpdate: (details) {
+                        if (_isDrawing) {
+                          setState(() {
+                            _points.add(details.localPosition);
+                          });
+                        }
+                      },
+                      onPanEnd: (details) {
+                        setState(() {
+                          _isDrawing = false;
+                          _isDrawingInCanvas = false;
+                          _points.add(Offset.infinite);
+                        });
+                        _saveSketchToCanvas();
+                        _saveCanvas(showMessage: false);
+                      },
+                      child: CustomPaint(
+                        painter: SketchPainter(_points),
+                        size: Size.infinite,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton.icon(
+                      onPressed: _clearSketch,
+                      icon: const Icon(Icons.clear),
+                      label: const Text('Limpiar Dibujo'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red.shade50,
+                        foregroundColor: Colors.red.shade700,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
   }
 
   Widget _buildSection({
