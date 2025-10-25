@@ -4,6 +4,7 @@ import 'dart:convert';
 import '../models/canvas_models.dart';
 import '../widgets/canvas_section.dart';
 import '../widgets/app_navigation_drawer.dart';
+import '../l10n/app_localizations.dart';
 
 class BusinessModelCanvasPage extends StatefulWidget {
   const BusinessModelCanvasPage({super.key});
@@ -15,72 +16,6 @@ class BusinessModelCanvasPage extends StatefulWidget {
 class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
   static const String storageKey = 'businessModelCanvas';
   BusinessModelCanvas canvas = BusinessModelCanvas.empty();
-
-  final List<CanvasBlock> initialBlocks = [
-    CanvasBlock(
-      id: 'keyPartners',
-      title: 'Key Partners',
-      content: [],
-      area: CanvasArea.infrastructure,
-      gridArea: const GridArea(colSpan: 2, rowSpan: 2),
-    ),
-    CanvasBlock(
-      id: 'keyActivities',
-      title: 'Key Activities',
-      content: [],
-      area: CanvasArea.infrastructure,
-      gridArea: const GridArea(colSpan: 2, rowSpan: 1),
-    ),
-    CanvasBlock(
-      id: 'valuePropositions',
-      title: 'Value Propositions',
-      content: [],
-      area: CanvasArea.offer,
-      gridArea: const GridArea(colSpan: 4, rowSpan: 2),
-    ),
-    CanvasBlock(
-      id: 'customerRelationships',
-      title: 'Customer Relationships',
-      content: [],
-      area: CanvasArea.customers,
-      gridArea: const GridArea(colSpan: 2, rowSpan: 1),
-    ),
-    CanvasBlock(
-      id: 'customerSegments',
-      title: 'Customer Segments',
-      content: [],
-      area: CanvasArea.customers,
-      gridArea: const GridArea(colSpan: 2, rowSpan: 2),
-    ),
-    CanvasBlock(
-      id: 'keyResources',
-      title: 'Key Resources',
-      content: [],
-      area: CanvasArea.infrastructure,
-      gridArea: const GridArea(colSpan: 2, rowSpan: 1),
-    ),
-    CanvasBlock(
-      id: 'channels',
-      title: 'Channels',
-      content: [],
-      area: CanvasArea.customers,
-      gridArea: const GridArea(colSpan: 2, rowSpan: 1),
-    ),
-    CanvasBlock(
-      id: 'costStructure',
-      title: 'Cost Structure',
-      content: [],
-      area: CanvasArea.finance,
-      gridArea: const GridArea(colSpan: 6, rowSpan: 1),
-    ),
-    CanvasBlock(
-      id: 'revenueStreams',
-      title: 'Revenue Streams',
-      content: [],
-      area: CanvasArea.finance,
-      gridArea: const GridArea(colSpan: 6, rowSpan: 1),
-    ),
-  ];
 
   @override
   void initState() {
@@ -129,7 +64,33 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
     }
   }
 
-  Widget _buildCanvasSection(String id, String title, CanvasArea area, {bool isLarge = false}) {
+  String _getLocalizedTitle(BuildContext context, String id) {
+    final localizations = AppLocalizations.of(context)!;
+    switch (id) {
+      case 'keyPartners':
+        return localizations.keyPartners;
+      case 'keyActivities':
+        return localizations.keyActivities;
+      case 'keyResources':
+        return localizations.keyResources;
+      case 'valuePropositions':
+        return localizations.valuePropositions;
+      case 'customerRelationships':
+        return localizations.customerRelationships;
+      case 'channels':
+        return localizations.channels;
+      case 'customerSegments':
+        return localizations.customerSegments;
+      case 'costStructure':
+        return localizations.costStructure;
+      case 'revenueStreams':
+        return localizations.revenueStreams;
+      default:
+        return id;
+    }
+  }
+
+  Widget _buildCanvasSection(BuildContext context, String id, CanvasArea area, {bool isLarge = false}) {
     return Container(
       constraints: BoxConstraints(
         minHeight: isLarge ? 300 : 150,
@@ -137,7 +98,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
       ),
       child: CanvasSection(
         id: id,
-        title: title,
+        title: _getLocalizedTitle(context, id),
         content: canvas.getContentById(id),
         onChange: _handleChange(id),
         area: area,
@@ -145,17 +106,17 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
     );
   }
 
-  Widget _buildCanvasSectionExpanded(String id, String title, CanvasArea area) {
+  Widget _buildCanvasSectionExpanded(BuildContext context, String id, CanvasArea area) {
     return CanvasSection(
       id: id,
-      title: title,
+      title: _getLocalizedTitle(context, id),
       content: canvas.getContentById(id),
       onChange: _handleChange(id),
       area: area,
     );
   }
 
-  Widget _buildPreviewSection(String id, String title, CanvasArea area) {
+  Widget _buildPreviewSection(BuildContext context, String id, CanvasArea area) {
     // Determinar cuántos elementos mostrar según la sección
     int maxItems = 3;
     if (id == 'valuePropositions') {
@@ -164,6 +125,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
     
     final content = canvas.getContentById(id);
     final displayItems = content.take(maxItems).toList();
+    final localizations = AppLocalizations.of(context)!;
     
     return Container(
       decoration: BoxDecoration(
@@ -177,7 +139,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
             child: Text(
-              title,
+              _getLocalizedTitle(context, id),
               style: TextStyle(
                 fontSize: 9,
                 fontWeight: FontWeight.w600,
@@ -195,7 +157,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
               child: displayItems.isEmpty
                   ? Center(
                       child: Text(
-                        'Vacío',
+                        localizations.empty,
                         style: TextStyle(
                           fontSize: 7,
                           color: _getPreviewTextColor(area).withOpacity(0.5),
@@ -228,7 +190,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                               width: double.infinity,
                               padding: const EdgeInsets.symmetric(vertical: 1),
                               child: Text(
-                                '+${content.length - maxItems} más',
+                                '+${content.length - maxItems} ${localizations.more}',
                                 style: TextStyle(
                                   fontSize: 6,
                                   color: _getPreviewTextColor(area).withOpacity(0.7),
@@ -287,6 +249,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
   }
 
   void _showCanvasPreview(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => StatefulBuilder(
@@ -307,16 +270,16 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Vista previa del lienzo',
-                              style: TextStyle(
+                            Text(
+                              localizations.canvasPreview,
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
-                              'Actualización automática',
+                              localizations.automaticUpdate,
                               style: TextStyle(
                                 fontSize: 11,
                                 color: Colors.green.shade600,
@@ -343,7 +306,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                             ),
                             const SizedBox(width: 3),
                             Text(
-                              'En vivo',
+                              localizations.liveUpdate,
                               style: TextStyle(
                                 fontSize: 10,
                                 color: Colors.green.shade700,
@@ -367,7 +330,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                   ),
                   const SizedBox(height: 16),
                   Expanded(
-                    child: _buildPreviewGrid(),
+                    child: _buildPreviewGrid(context),
                   ),
                   const SizedBox(height: 8),
                   Container(
@@ -388,7 +351,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                         const SizedBox(width: 4),
                         Expanded(
                           child: Text(
-                            'Vista actualizada automáticamente',
+                            localizations.viewUpdatedAutomatically,
                             style: TextStyle(
                               fontSize: 10,
                               color: Colors.grey.shade600,
@@ -412,7 +375,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
     });
   }
 
-  Widget _buildPreviewGrid() {
+  Widget _buildPreviewGrid(BuildContext context) {
     return Column(
       children: [
         // Primera fila - 2/3 del espacio
@@ -423,7 +386,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
             children: [
               Expanded(
                 flex: 2,
-                child: _buildPreviewSection('keyPartners', 'Key Partners', CanvasArea.infrastructure),
+                child: _buildPreviewSection(context, 'keyPartners', CanvasArea.infrastructure),
               ),
               const SizedBox(width: 4),
               Expanded(
@@ -431,11 +394,11 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                 child: Column(
                   children: [
                     Expanded(
-                      child: _buildPreviewSection('keyActivities', 'Key Activities', CanvasArea.infrastructure),
+                      child: _buildPreviewSection(context, 'keyActivities', CanvasArea.infrastructure),
                     ),
                     const SizedBox(height: 4),
                     Expanded(
-                      child: _buildPreviewSection('keyResources', 'Key Resources', CanvasArea.infrastructure),
+                      child: _buildPreviewSection(context, 'keyResources', CanvasArea.infrastructure),
                     ),
                   ],
                 ),
@@ -443,7 +406,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
               const SizedBox(width: 4),
               Expanded(
                 flex: 4,
-                child: _buildPreviewSection('valuePropositions', 'Value Propositions', CanvasArea.offer),
+                child: _buildPreviewSection(context, 'valuePropositions', CanvasArea.offer),
               ),
               const SizedBox(width: 4),
               Expanded(
@@ -451,11 +414,11 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                 child: Column(
                   children: [
                     Expanded(
-                      child: _buildPreviewSection('customerRelationships', 'Customer Relationships', CanvasArea.customers),
+                      child: _buildPreviewSection(context, 'customerRelationships', CanvasArea.customers),
                     ),
                     const SizedBox(height: 4),
                     Expanded(
-                      child: _buildPreviewSection('channels', 'Channels', CanvasArea.customers),
+                      child: _buildPreviewSection(context, 'channels', CanvasArea.customers),
                     ),
                   ],
                 ),
@@ -463,7 +426,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
               const SizedBox(width: 4),
               Expanded(
                 flex: 2,
-                child: _buildPreviewSection('customerSegments', 'Customer Segments', CanvasArea.customers),
+                child: _buildPreviewSection(context, 'customerSegments', CanvasArea.customers),
               ),
             ],
           ),
@@ -476,11 +439,11 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: _buildPreviewSection('costStructure', 'Cost Structure', CanvasArea.finance),
+                child: _buildPreviewSection(context, 'costStructure', CanvasArea.finance),
               ),
               const SizedBox(width: 4),
               Expanded(
-                child: _buildPreviewSection('revenueStreams', 'Revenue Streams', CanvasArea.finance),
+                child: _buildPreviewSection(context, 'revenueStreams', CanvasArea.finance),
               ),
             ],
           ),
@@ -489,7 +452,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
     );
   }
 
-  Widget _buildDesktopGrid() {
+  Widget _buildDesktopGrid(BuildContext context) {
     return Column(
       children: [
         // First row - takes 2/3 of available height
@@ -500,7 +463,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
             children: [
               Expanded(
                 flex: 2,
-                child: _buildCanvasSectionExpanded('keyPartners', 'Key Partners', CanvasArea.infrastructure),
+                child: _buildCanvasSectionExpanded(context, 'keyPartners', CanvasArea.infrastructure),
               ),
               const SizedBox(width: 8),
               Expanded(
@@ -508,11 +471,11 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                 child: Column(
                   children: [
                     Expanded(
-                      child: _buildCanvasSectionExpanded('keyActivities', 'Key Activities', CanvasArea.infrastructure),
+                      child: _buildCanvasSectionExpanded(context, 'keyActivities', CanvasArea.infrastructure),
                     ),
                     const SizedBox(height: 8),
                     Expanded(
-                      child: _buildCanvasSectionExpanded('keyResources', 'Key Resources', CanvasArea.infrastructure),
+                      child: _buildCanvasSectionExpanded(context, 'keyResources', CanvasArea.infrastructure),
                     ),
                   ],
                 ),
@@ -520,7 +483,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
               const SizedBox(width: 8),
               Expanded(
                 flex: 4,
-                child: _buildCanvasSectionExpanded('valuePropositions', 'Value Propositions', CanvasArea.offer),
+                child: _buildCanvasSectionExpanded(context, 'valuePropositions', CanvasArea.offer),
               ),
               const SizedBox(width: 8),
               Expanded(
@@ -528,11 +491,11 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                 child: Column(
                   children: [
                     Expanded(
-                      child: _buildCanvasSectionExpanded('customerRelationships', 'Customer Relationships', CanvasArea.customers),
+                      child: _buildCanvasSectionExpanded(context, 'customerRelationships', CanvasArea.customers),
                     ),
                     const SizedBox(height: 8),
                     Expanded(
-                      child: _buildCanvasSectionExpanded('channels', 'Channels', CanvasArea.customers),
+                      child: _buildCanvasSectionExpanded(context, 'channels', CanvasArea.customers),
                     ),
                   ],
                 ),
@@ -540,7 +503,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
               const SizedBox(width: 8),
               Expanded(
                 flex: 2,
-                child: _buildCanvasSectionExpanded('customerSegments', 'Customer Segments', CanvasArea.customers),
+                child: _buildCanvasSectionExpanded(context, 'customerSegments', CanvasArea.customers),
               ),
             ],
           ),
@@ -553,11 +516,11 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: _buildCanvasSectionExpanded('costStructure', 'Cost Structure', CanvasArea.finance),
+                child: _buildCanvasSectionExpanded(context, 'costStructure', CanvasArea.finance),
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: _buildCanvasSectionExpanded('revenueStreams', 'Revenue Streams', CanvasArea.finance),
+                child: _buildCanvasSectionExpanded(context, 'revenueStreams', CanvasArea.finance),
               ),
             ],
           ),
@@ -568,13 +531,15 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       drawer: const AppNavigationDrawer(selectedIndex: 1),
       appBar: AppBar(
-        title: const Text(
-          'Business Model Canvas',
-          style: TextStyle(
+        title: Text(
+          localizations.businessModelCanvas,
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
@@ -587,7 +552,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
           if (MediaQuery.of(context).size.width < 1024)
             IconButton(
               icon: const Icon(Icons.preview),
-              tooltip: 'Vista previa del lienzo completo',
+              tooltip: localizations.fullCanvasPreview,
               onPressed: () => _showCanvasPreview(context),
             ),
           IconButton(
@@ -596,16 +561,12 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: const Text('Business Model Canvas'),
-                  content: const Text(
-                    'Herramienta para diseñar y visualizar modelos de negocio.\n\n'
-                    'Añade elementos en cada sección y estos se guardarán automáticamente.\n\n'
-                    'Versión Flutter - Multiplataforma',
-                  ),
+                  title: Text(localizations.businessModelCanvas),
+                  content: Text(localizations.businessModelCanvasInfo),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: const Text('Cerrar'),
+                      child: Text(localizations.close),
                     ),
                   ],
                 ),
@@ -635,23 +596,23 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                 if (constraints.maxWidth < 600) {
                   return Column(
                     children: [
-                      _buildCanvasSection('keyPartners', 'Key Partners', CanvasArea.infrastructure),
+                      _buildCanvasSection(context, 'keyPartners', CanvasArea.infrastructure),
                       const SizedBox(height: 8),
-                      _buildCanvasSection('keyActivities', 'Key Activities', CanvasArea.infrastructure),
+                      _buildCanvasSection(context, 'keyActivities', CanvasArea.infrastructure),
                       const SizedBox(height: 8),
-                      _buildCanvasSection('keyResources', 'Key Resources', CanvasArea.infrastructure),
+                      _buildCanvasSection(context, 'keyResources', CanvasArea.infrastructure),
                       const SizedBox(height: 8),
-                      _buildCanvasSection('valuePropositions', 'Value Propositions', CanvasArea.offer),
+                      _buildCanvasSection(context, 'valuePropositions', CanvasArea.offer),
                       const SizedBox(height: 8),
-                      _buildCanvasSection('customerRelationships', 'Customer Relationships', CanvasArea.customers),
+                      _buildCanvasSection(context, 'customerRelationships', CanvasArea.customers),
                       const SizedBox(height: 8),
-                      _buildCanvasSection('channels', 'Channels', CanvasArea.customers),
+                      _buildCanvasSection(context, 'channels', CanvasArea.customers),
                       const SizedBox(height: 8),
-                      _buildCanvasSection('customerSegments', 'Customer Segments', CanvasArea.customers),
+                      _buildCanvasSection(context, 'customerSegments', CanvasArea.customers),
                       const SizedBox(height: 8),
-                      _buildCanvasSection('costStructure', 'Cost Structure', CanvasArea.finance),
+                      _buildCanvasSection(context, 'costStructure', CanvasArea.finance),
                       const SizedBox(height: 8),
-                      _buildCanvasSection('revenueStreams', 'Revenue Streams', CanvasArea.finance),
+                      _buildCanvasSection(context, 'revenueStreams', CanvasArea.finance),
                     ],
                   );
                 }
@@ -665,11 +626,11 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: _buildCanvasSection('keyPartners', 'Key Partners', CanvasArea.infrastructure),
+                            child: _buildCanvasSection(context, 'keyPartners', CanvasArea.infrastructure),
                           ),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: _buildCanvasSection('valuePropositions', 'Value Propositions', CanvasArea.offer),
+                            child: _buildCanvasSection(context, 'valuePropositions', CanvasArea.offer),
                           ),
                         ],
                       ),
@@ -680,11 +641,11 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: _buildCanvasSection('keyActivities', 'Key Activities', CanvasArea.infrastructure),
+                            child: _buildCanvasSection(context, 'keyActivities', CanvasArea.infrastructure),
                           ),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: _buildCanvasSection('customerRelationships', 'Customer Relationships', CanvasArea.customers),
+                            child: _buildCanvasSection(context, 'customerRelationships', CanvasArea.customers),
                           ),
                         ],
                       ),
@@ -695,11 +656,11 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: _buildCanvasSection('keyResources', 'Key Resources', CanvasArea.infrastructure),
+                            child: _buildCanvasSection(context, 'keyResources', CanvasArea.infrastructure),
                           ),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: _buildCanvasSection('channels', 'Channels', CanvasArea.customers),
+                            child: _buildCanvasSection(context, 'channels', CanvasArea.customers),
                           ),
                         ],
                       ),
@@ -710,11 +671,11 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: _buildCanvasSection('customerSegments', 'Customer Segments', CanvasArea.customers),
+                            child: _buildCanvasSection(context, 'customerSegments', CanvasArea.customers),
                           ),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: _buildCanvasSection('costStructure', 'Cost Structure', CanvasArea.finance),
+                            child: _buildCanvasSection(context, 'costStructure', CanvasArea.finance),
                           ),
                         ],
                       ),
@@ -725,7 +686,7 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: _buildCanvasSection('revenueStreams', 'Revenue Streams', CanvasArea.finance),
+                            child: _buildCanvasSection(context, 'revenueStreams', CanvasArea.finance),
                           ),
                           const SizedBox(width: 8),
                           Expanded(
@@ -748,10 +709,10 @@ class _BusinessModelCanvasPageState extends State<BusinessModelCanvasPage> {
                       physics: const BouncingScrollPhysics(),
                       child: Container(
                         height: 500, // Minimum height for grid
-                        child: _buildDesktopGrid(),
+                        child: _buildDesktopGrid(context),
                       ),
                     )
-                  : _buildDesktopGrid(),
+                  : _buildDesktopGrid(context),
             );
               },
             ),

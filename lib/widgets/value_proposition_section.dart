@@ -160,10 +160,9 @@ class _ValuePropositionSectionState extends State<ValuePropositionSection> {
     final sectionBorderColor = _getSectionBorderColor(widget.id);
 
     return Container(
-      height: 320, // Altura aumentada para evitar overflow
+      // Sin altura fija - se adapta al contenido disponible
       constraints: const BoxConstraints(
-        minHeight: 320,
-        maxHeight: 320,
+        minHeight: 200,
       ),
       decoration: BoxDecoration(
         color: sectionLightColor,
@@ -178,11 +177,12 @@ class _ValuePropositionSectionState extends State<ValuePropositionSection> {
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          // Header compacto - altura fija 70px para evitar overflow
+          // Header más compacto - altura ajustada
           Container(
-            height: 70,
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            height: 38, // Aumentado ligeramente para acomodar texto
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
             decoration: BoxDecoration(
               color: sectionColor,
               borderRadius: const BorderRadius.only(
@@ -193,18 +193,18 @@ class _ValuePropositionSectionState extends State<ValuePropositionSection> {
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(3),
                   ),
                   child: Icon(
                     _getSectionIcon(widget.id),
                     color: Colors.white,
-                    size: 16,
+                    size: 12, // Reducido de 14 a 12
                   ),
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 4),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,22 +213,22 @@ class _ValuePropositionSectionState extends State<ValuePropositionSection> {
                       Text(
                         widget.title,
                         style: const TextStyle(
-                          fontSize: 13,
+                          fontSize: 12, // Aumentado a 12 para mejor legibilidad
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 2),
                       Text(
                         widget.subtitle,
                         style: TextStyle(
-                          fontSize: 9,
+                          fontSize: 9, // Aumentado a 9 para mejor legibilidad
                           color: Colors.white.withOpacity(0.9),
                           fontStyle: FontStyle.italic,
+                          height: 1.0,
                         ),
-                        maxLines: 2,
+                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],
@@ -253,10 +253,13 @@ class _ValuePropositionSectionState extends State<ValuePropositionSection> {
             ),
           ),
           
-          // Content list - altura fija 170px para visualizar items
+          // Content list - altura flexible sin Expanded
           Container(
-            height: 170,
-            padding: const EdgeInsets.all(8),
+            constraints: const BoxConstraints(
+              minHeight: 104, // Ajustado por el header de 38px
+              maxHeight: 144, // Ajustado proporcionalmente
+            ),
+            padding: const EdgeInsets.all(4),
             child: widget.content.isEmpty
                 ? Center(
                     child: Column(
@@ -265,23 +268,23 @@ class _ValuePropositionSectionState extends State<ValuePropositionSection> {
                         Icon(
                           _getSectionIcon(widget.id),
                           color: sectionColor.withOpacity(0.3),
-                          size: 28,
+                          size: 24,
                         ),
-                        const SizedBox(height: 6),
+                        const SizedBox(height: 4),
                         Text(
                           'Sin elementos',
                           style: TextStyle(
                             color: sectionColor.withOpacity(0.5),
-                            fontSize: 12,
+                            fontSize: 10,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: 2),
                         Text(
                           'Agrega elementos usando el botón +',
                           style: TextStyle(
                             color: sectionColor.withOpacity(0.4),
-                            fontSize: 10,
+                            fontSize: 8,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -317,8 +320,8 @@ class _ValuePropositionSectionState extends State<ValuePropositionSection> {
                                     });
                                   },
                                   child: Container(
-                                    margin: const EdgeInsets.only(bottom: 8),
-                                    padding: const EdgeInsets.all(12),
+                                    margin: const EdgeInsets.only(bottom: 4),
+                                    padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(
                                       color: _selectedItemIndex == index 
                                           ? sectionColor.withOpacity(0.1)
@@ -341,36 +344,36 @@ class _ValuePropositionSectionState extends State<ValuePropositionSection> {
                                     child: Row(
                                       children: [
                                         Container(
-                                          width: 4,
-                                          height: 20,
+                                          width: 3,
+                                          height: 16,
                                           decoration: BoxDecoration(
                                             color: sectionColor,
                                             borderRadius: BorderRadius.circular(2),
                                           ),
                                         ),
-                                        const SizedBox(width: 12),
+                                        const SizedBox(width: 8),
                                         Expanded(
                                           child: Text(
                                             widget.content[index],
                                             style: const TextStyle(
-                                              fontSize: 14,
-                                              height: 1.3,
+                                              fontSize: 12,
+                                              height: 1.2,
                                             ),
                                           ),
                                         ),
                                         if (_selectedItemIndex == index)
                                           InkWell(
                                             onTap: () => _removeItem(index),
-                                            borderRadius: BorderRadius.circular(16),
+                                            borderRadius: BorderRadius.circular(12),
                                             child: Container(
-                                              padding: const EdgeInsets.all(6),
+                                              padding: const EdgeInsets.all(4),
                                               decoration: BoxDecoration(
                                                 color: Colors.red.shade50,
                                                 shape: BoxShape.circle,
                                               ),
                                               child: Icon(
                                                 Icons.close,
-                                                size: 16,
+                                                size: 12,
                                                 color: Colors.red.shade600,
                                               ),
                                             ),
@@ -387,10 +390,10 @@ class _ValuePropositionSectionState extends State<ValuePropositionSection> {
                     ),
           ),
 
-          // Add item section - altura fija 80px para evitar overflow
+          // Add item section - altura reducida para evitar overflow
           Container(
-            height: 80,
-            padding: const EdgeInsets.all(12),
+            height: 48, // Reducido de 55 a 48
+            padding: const EdgeInsets.all(4), // Reducido padding
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.7),
               borderRadius: const BorderRadius.only(
@@ -403,43 +406,42 @@ class _ValuePropositionSectionState extends State<ValuePropositionSection> {
               children: [
                 Expanded(
                   child: Container(
-                    constraints: const BoxConstraints(
-                      minHeight: 36,
-                      maxHeight: 56,
-                    ),
+                    height: 32, // Altura fija para el TextField
                     child: TextField(
                       controller: _controller,
                       focusNode: _focusNode,
-                      maxLines: 2,
+                      maxLines: 1, // Solo una línea para evitar overflow
                       decoration: InputDecoration(
                         hintText: _getPlaceholderText(widget.id),
                         hintStyle: TextStyle(
                           color: sectionColor.withOpacity(0.6),
-                          fontSize: 11,
+                          fontSize: 10,
                         ),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(6),
                           borderSide: BorderSide(color: sectionBorderColor),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(6),
                           borderSide: BorderSide(color: sectionColor, width: 2),
                         ),
                         contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 8,
+                          horizontal: 6,
+                          vertical: 4,
                         ),
                         isDense: true,
                       ),
-                      style: TextStyle(fontSize: 11, color: sectionColor),
+                      style: TextStyle(fontSize: 10, color: sectionColor),
                       onSubmitted: (_) => _addItem(),
                     ),
                   ),
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 6),
                 Container(
+                  width: 32,
+                  height: 32,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -449,23 +451,21 @@ class _ValuePropositionSectionState extends State<ValuePropositionSection> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(6),
                     boxShadow: [
                       BoxShadow(
                         color: sectionColor.withOpacity(0.3),
-                        blurRadius: 4,
-                        offset: const Offset(0, 2),
+                        blurRadius: 3,
+                        offset: const Offset(0, 1),
                       ),
                     ],
                   ),
                   child: IconButton(
                     onPressed: _addItem,
                     icon: const Icon(Icons.add, color: Colors.white),
-                    iconSize: 18,
-                    constraints: const BoxConstraints(
-                      minWidth: 36,
-                      minHeight: 36,
-                    ),
+                    iconSize: 14,
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints.expand(),
                   ),
                 ),
               ],

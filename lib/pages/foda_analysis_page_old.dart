@@ -4,7 +4,6 @@ import 'dart:convert';
 import '../models/foda_models.dart';
 import '../widgets/foda_section.dart';
 import '../widgets/app_navigation_drawer.dart';
-import '../l10n/app_localizations.dart';
 
 class FodaAnalysisPage extends StatefulWidget {
   const FodaAnalysisPage({super.key});
@@ -62,23 +61,7 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
     }
   }
 
-  String _getLocalizedTitle(BuildContext context, String id) {
-    final localizations = AppLocalizations.of(context)!;
-    switch (id) {
-      case 'fortalezas':
-        return localizations.strengths;
-      case 'oportunidades':
-        return localizations.opportunities;
-      case 'debilidades':
-        return localizations.weaknesses;
-      case 'amenazas':
-        return localizations.threats;
-      default:
-        return id;
-    }
-  }
-
-  Widget _buildFodaSection(BuildContext context, String id, FodaArea area, {bool isLarge = false}) {
+  Widget _buildFodaSection(String id, String title, FodaArea area, {bool isLarge = false}) {
     return Container(
       constraints: BoxConstraints(
         minHeight: isLarge ? 300 : 150,
@@ -86,7 +69,7 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
       ),
       child: FodaSection(
         id: id,
-        title: _getLocalizedTitle(context, id),
+        title: title,
         content: foda.getContentById(id),
         onChange: _handleChange(id),
         area: area,
@@ -94,20 +77,19 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
     );
   }
 
-  Widget _buildFodaSectionExpanded(BuildContext context, String id, FodaArea area) {
+  Widget _buildFodaSectionExpanded(String id, String title, FodaArea area) {
     return FodaSection(
       id: id,
-      title: _getLocalizedTitle(context, id),
+      title: title,
       content: foda.getContentById(id),
       onChange: _handleChange(id),
       area: area,
     );
   }
 
-  Widget _buildPreviewSection(BuildContext context, String id, FodaArea area) {
+  Widget _buildPreviewSection(String id, String title, FodaArea area) {
     final content = foda.getContentById(id);
     final displayItems = content.take(4).toList(); // Máximo 4 elementos en preview
-    final localizations = AppLocalizations.of(context)!;
     
     return Container(
       decoration: BoxDecoration(
@@ -128,8 +110,8 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
               ),
             ),
             child: Text(
-              _getLocalizedTitle(context, id),
-              style: const TextStyle(
+              title,
+              style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
@@ -146,7 +128,7 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
               child: displayItems.isEmpty
                   ? Center(
                       child: Text(
-                        localizations.empty,
+                        'Vacío',
                         style: TextStyle(
                           fontSize: 8,
                           color: _getPreviewBorderColor(id).withOpacity(0.5),
@@ -179,7 +161,7 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
                               width: double.infinity,
                               padding: const EdgeInsets.symmetric(vertical: 1),
                               child: Text(
-                                '+${content.length - 4} ${localizations.more}',
+                                '+${content.length - 4} más',
                                 style: TextStyle(
                                   fontSize: 7,
                                   color: _getPreviewBorderColor(id).withOpacity(0.7),
@@ -228,7 +210,7 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
     }
   }
 
-  Widget _buildDesktopGrid(BuildContext context) {
+  Widget _buildDesktopGrid() {
     return Column(
       children: [
         // Fila superior - Fortalezas y Oportunidades (Factores Positivos)
@@ -237,11 +219,11 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: _buildFodaSectionExpanded(context, 'fortalezas', FodaArea.internal),
+                child: _buildFodaSectionExpanded('fortalezas', 'Fortalezas\n(Strengths)', FodaArea.internal),
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: _buildFodaSectionExpanded(context, 'oportunidades', FodaArea.external),
+                child: _buildFodaSectionExpanded('oportunidades', 'Oportunidades\n(Opportunities)', FodaArea.external),
               ),
             ],
           ),
@@ -253,11 +235,11 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: _buildFodaSectionExpanded(context, 'debilidades', FodaArea.internal),
+                child: _buildFodaSectionExpanded('debilidades', 'Debilidades\n(Weaknesses)', FodaArea.internal),
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: _buildFodaSectionExpanded(context, 'amenazas', FodaArea.external),
+                child: _buildFodaSectionExpanded('amenazas', 'Amenazas\n(Threats)', FodaArea.external),
               ),
             ],
           ),
@@ -266,7 +248,7 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
     );
   }
 
-  Widget _buildPreviewGrid(BuildContext context) {
+  Widget _buildPreviewGrid() {
     return Column(
       children: [
         // Fila superior - Factores Positivos
@@ -275,11 +257,11 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: _buildPreviewSection(context, 'fortalezas', FodaArea.internal),
+                child: _buildPreviewSection('fortalezas', 'Fortalezas', FodaArea.internal),
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: _buildPreviewSection(context, 'oportunidades', FodaArea.external),
+                child: _buildPreviewSection('oportunidades', 'Oportunidades', FodaArea.external),
               ),
             ],
           ),
@@ -291,11 +273,11 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: _buildPreviewSection(context, 'debilidades', FodaArea.internal),
+                child: _buildPreviewSection('debilidades', 'Debilidades', FodaArea.internal),
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: _buildPreviewSection(context, 'amenazas', FodaArea.external),
+                child: _buildPreviewSection('amenazas', 'Amenazas', FodaArea.external),
               ),
             ],
           ),
@@ -305,7 +287,6 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
   }
 
   void _showFodaPreview(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => StatefulBuilder(
@@ -325,16 +306,16 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              localizations.swotPreview,
-                              style: const TextStyle(
+                            const Text(
+                              'Vista previa FODA',
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
-                              localizations.automaticUpdate,
+                              'Actualización automática',
                               style: TextStyle(
                                 fontSize: 11,
                                 color: Colors.green.shade600,
@@ -361,7 +342,7 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
                             ),
                             const SizedBox(width: 3),
                             Text(
-                              localizations.liveUpdate,
+                              'En vivo',
                               style: TextStyle(
                                 fontSize: 10,
                                 color: Colors.green.shade700,
@@ -385,7 +366,7 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
                   ),
                   const SizedBox(height: 16),
                   Expanded(
-                    child: _buildPreviewGrid(context),
+                    child: _buildPreviewGrid(),
                   ),
                   const SizedBox(height: 8),
                   Container(
@@ -406,7 +387,7 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
                         const SizedBox(width: 4),
                         Expanded(
                           child: Text(
-                            localizations.viewUpdatedAutomatically,
+                            'Vista FODA actualizada automáticamente',
                             style: TextStyle(
                               fontSize: 10,
                               color: Colors.grey.shade600,
@@ -431,15 +412,13 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
-    
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       drawer: const AppNavigationDrawer(selectedIndex: 2),
       appBar: AppBar(
-        title: Text(
-          localizations.fodaAnalysis,
-          style: const TextStyle(
+        title: const Text(
+          'Análisis FODA',
+          style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
@@ -451,7 +430,7 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
           if (MediaQuery.of(context).size.width < 1024)
             IconButton(
               icon: const Icon(Icons.preview),
-              tooltip: localizations.fullSwotPreview,
+              tooltip: 'Vista previa del análisis FODA',
               onPressed: () => _showFodaPreview(context),
             ),
           IconButton(
@@ -460,12 +439,19 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: Text(localizations.fodaAnalysis),
-                  content: Text(localizations.swotAnalysisInfo),
+                  title: const Text('Análisis FODA'),
+                  content: const Text(
+                    'Herramienta para analizar Fortalezas, Oportunidades, Debilidades y Amenazas.\n\n'
+                    '• Fortalezas: Factores internos positivos\n'
+                    '• Oportunidades: Factores externos positivos\n'
+                    '• Debilidades: Factores internos negativos\n'
+                    '• Amenazas: Factores externos negativos\n\n'
+                    'Los elementos se guardan automáticamente.',
+                  ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: Text(localizations.close),
+                      child: const Text('Cerrar'),
                     ),
                   ],
                 ),
@@ -495,13 +481,13 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
                   // Mobile: una columna
                   return Column(
                     children: [
-                      _buildFodaSection(context, 'fortalezas', FodaArea.internal),
+                      _buildFodaSection('fortalezas', 'Fortalezas (Strengths)', FodaArea.internal),
                       const SizedBox(height: 8),
-                      _buildFodaSection(context, 'oportunidades', FodaArea.external),
+                      _buildFodaSection('oportunidades', 'Oportunidades (Opportunities)', FodaArea.external),
                       const SizedBox(height: 8),
-                      _buildFodaSection(context, 'debilidades', FodaArea.internal),
+                      _buildFodaSection('debilidades', 'Debilidades (Weaknesses)', FodaArea.internal),
                       const SizedBox(height: 8),
-                      _buildFodaSection(context, 'amenazas', FodaArea.external),
+                      _buildFodaSection('amenazas', 'Amenazas (Threats)', FodaArea.external),
                     ],
                   );
                 }
@@ -514,11 +500,11 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: _buildFodaSection(context, 'fortalezas', FodaArea.internal),
+                            child: _buildFodaSection('fortalezas', 'Fortalezas (Strengths)', FodaArea.internal),
                           ),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: _buildFodaSection(context, 'oportunidades', FodaArea.external),
+                            child: _buildFodaSection('oportunidades', 'Oportunidades (Opportunities)', FodaArea.external),
                           ),
                         ],
                       ),
@@ -527,11 +513,11 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: _buildFodaSection(context, 'debilidades', FodaArea.internal),
+                            child: _buildFodaSection('debilidades', 'Debilidades (Weaknesses)', FodaArea.internal),
                           ),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: _buildFodaSection(context, 'amenazas', FodaArea.external),
+                            child: _buildFodaSection('amenazas', 'Amenazas (Threats)', FodaArea.external),
                           ),
                         ],
                       ),
@@ -550,10 +536,10 @@ class _FodaAnalysisPageState extends State<FodaAnalysisPage> {
                           physics: const BouncingScrollPhysics(),
                           child: Container(
                             height: 400,
-                            child: _buildDesktopGrid(context),
+                            child: _buildDesktopGrid(),
                           ),
                         )
-                      : _buildDesktopGrid(context),
+                      : _buildDesktopGrid(),
                 );
               },
             ),

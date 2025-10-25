@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:async';
 import '../models/canvas_models.dart';
 import '../widgets/app_navigation_drawer.dart';
+import '../l10n/app_localizations.dart';
 
 class IdeaNapkinCanvasPage extends StatefulWidget {
   const IdeaNapkinCanvasPage({super.key});
@@ -123,9 +124,9 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
         });
         
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Canvas guardado automáticamente'),
-            duration: Duration(seconds: 2),
+          SnackBar(
+            content: Text(_getLocalizedText(context, 'canvasSaved')),
+            duration: const Duration(seconds: 2),
             behavior: SnackBarBehavior.floating,
           ),
         );
@@ -166,6 +167,50 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
     });
   }
 
+  String _getLocalizedText(BuildContext context, String key) {
+    final localizations = AppLocalizations.of(context)!;
+    switch (key) {
+      case 'titleSection':
+        return localizations.ideaTitle;
+      case 'titleHint':
+        return localizations.ideaTitleHint;
+      case 'descriptionSection':
+        return localizations.shortDescription;
+      case 'descriptionHint':
+        return localizations.shortDescriptionHint;
+      case 'audienceSection':
+        return localizations.targetAudience;
+      case 'audienceHint':
+        return localizations.targetAudienceHint;
+      case 'innovationSection':
+        return localizations.innovationAspect;
+      case 'innovationHint':
+        return localizations.innovationAspectHint;
+      case 'formulaSection':
+        return localizations.valueFormula;
+      case 'businessValue':
+        return localizations.businessValue;
+      case 'innovationPower':
+        return localizations.innovationPower;
+      case 'userValue':
+        return localizations.userValue;
+      case 'sketchSection':
+        return localizations.ideaSketch;
+      case 'clearCanvas':
+        return localizations.clearCanvas;
+      case 'clearCanvasConfirm':
+        return localizations.clearCanvasConfirm;
+      case 'cancel':
+        return localizations.cancel;
+      case 'clear':
+        return localizations.clear;
+      case 'canvasSaved':
+        return localizations.canvasSaved;
+      default:
+        return key;
+    }
+  }
+
   void _clearSketch() {
     setState(() {
       _points.clear();
@@ -197,17 +242,17 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Limpiar Canvas'),
-        content: const Text('¿Estás seguro de que quieres limpiar todo el contenido del Idea Napkin Canvas?'),
+        title: Text(_getLocalizedText(context, 'clearCanvas')),
+        content: Text(_getLocalizedText(context, 'clearCanvasConfirm')),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancelar'),
+            child: Text(_getLocalizedText(context, 'cancel')),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Limpiar'),
+            child: Text(_getLocalizedText(context, 'clear')),
           ),
         ],
       ),
@@ -225,13 +270,15 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
       drawer: const AppNavigationDrawer(selectedIndex: 5),
       appBar: AppBar(
-        title: const Text(
-          'Idea Napkin Canvas',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          localizations.ideaNapkinCanvas,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -377,15 +424,15 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
 
   Widget _buildTitleSection() {
     return _buildSection(
-      title: 'Título de la Idea',
+      title: _getLocalizedText(context, 'titleSection'),
       icon: Icons.lightbulb_outline,
       color: Colors.blue,
       child: TextField(
         controller: _titleController,
         onChanged: (_) => _updateCanvas(),
-        decoration: const InputDecoration(
-          hintText: 'Ingresa el título de tu idea...',
-          border: OutlineInputBorder(),
+        decoration: InputDecoration(
+          hintText: _getLocalizedText(context, 'titleHint'),
+          border: const OutlineInputBorder(),
         ),
         style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
       ),
@@ -394,15 +441,15 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
 
   Widget _buildDescriptionSection() {
     return _buildSection(
-      title: 'Descripción Corta',
+      title: _getLocalizedText(context, 'descriptionSection'),
       icon: Icons.description_outlined,
       color: Colors.green,
       child: TextField(
         controller: _descriptionController,
         onChanged: (_) => _updateCanvas(),
         maxLines: 3,
-        decoration: const InputDecoration(
-          hintText: 'Describe brevemente tu idea...',
+        decoration: InputDecoration(
+          hintText: _getLocalizedText(context, 'descriptionHint'),
           border: OutlineInputBorder(),
         ),
       ),
@@ -411,16 +458,16 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
 
   Widget _buildAudienceSection() {
     return _buildSection(
-      title: 'A Quiénes Va Dirigida',
+      title: _getLocalizedText(context, 'audienceSection'),
       icon: Icons.people_outline,
       color: Colors.orange,
       child: TextField(
         controller: _audienceController,
         onChanged: (_) => _updateCanvas(),
         maxLines: 2,
-        decoration: const InputDecoration(
-          hintText: 'Define tu público objetivo...',
-          border: OutlineInputBorder(),
+        decoration: InputDecoration(
+          hintText: _getLocalizedText(context, 'audienceHint'),
+          border: const OutlineInputBorder(),
         ),
       ),
     );
@@ -428,16 +475,16 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
 
   Widget _buildInnovationSection() {
     return _buildSection(
-      title: 'Aspecto de Innovación',
+      title: _getLocalizedText(context, 'innovationSection'),
       icon: Icons.auto_awesome,
       color: Colors.purple,
       child: TextField(
         controller: _innovationController,
         onChanged: (_) => _updateCanvas(),
         maxLines: 2,
-        decoration: const InputDecoration(
-          hintText: 'Qué hace innovadora tu idea...',
-          border: OutlineInputBorder(),
+        decoration: InputDecoration(
+          hintText: _getLocalizedText(context, 'innovationHint'),
+          border: const OutlineInputBorder(),
         ),
       ),
     );
@@ -445,7 +492,7 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
 
   Widget _buildFormulaSection() {
     return _buildSection(
-      title: 'Fórmula de Valor',
+      title: _getLocalizedText(context, 'formulaSection'),
       icon: Icons.calculate_outlined,
       color: Colors.teal,
       child: Column(
@@ -461,9 +508,9 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(2),
                   ],
-                  decoration: const InputDecoration(
-                    labelText: 'Valor de Negocio',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: _getLocalizedText(context, 'businessValue'),
+                    border: const OutlineInputBorder(),
                     hintText: '1-99',
                   ),
                   textAlign: TextAlign.center,
@@ -482,9 +529,9 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(2),
                   ],
-                  decoration: const InputDecoration(
-                    labelText: 'Poder de Innovación',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: _getLocalizedText(context, 'innovationPower'),
+                    border: const OutlineInputBorder(),
                     hintText: '1-99',
                   ),
                   textAlign: TextAlign.center,
@@ -503,9 +550,9 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(2),
                   ],
-                  decoration: const InputDecoration(
-                    labelText: 'Valor para el Usuario',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: _getLocalizedText(context, 'userValue'),
+                    border: const OutlineInputBorder(),
                     hintText: '1-99',
                   ),
                   textAlign: TextAlign.center,
@@ -586,10 +633,10 @@ class _IdeaNapkinCanvasPageState extends State<IdeaNapkinCanvasPage> {
                 child: const Icon(Icons.draw_outlined, color: Colors.indigo, size: 20),
               ),
               const SizedBox(width: 12),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Idea Sketch',
-                  style: TextStyle(
+                  _getLocalizedText(context, 'sketchSection'),
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.indigo,

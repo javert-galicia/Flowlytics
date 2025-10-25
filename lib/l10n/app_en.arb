@@ -75,12 +75,420 @@
   "@autoSaveInfo": {
     "description": "Information about auto-save feature"
   },
-  "versionInfo": "Flutter Version - Multiplatform",
+  "versionInfo": "Flowlytics by Javier Galicia",
   "@versionInfo": {
     "description": "Version information"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About section"
+  },
+  "aboutTitle": "About Flowlytics",
+  "@aboutTitle": {
+    "description": "About dialog title"
+  },
+  "aboutDescription": "Flowlytics is a suite of business analysis tools to promote Design Thinking and help entrepreneurs and business owners structure and analyze their business ideas.",
+  "@aboutDescription": {
+    "description": "About dialog description"
+  },
+  "developedBy": "Developed by Javier Galicia",
+  "@developedBy": {
+    "description": "Developer credit"
+  },
+  "visitGithub": "View code on GitHub",
+  "@visitGithub": {
+    "description": "GitHub link text"
+  },
+  "visitWebsite": "Visit my website",
+  "@visitWebsite": {
+    "description": "Website link text"
+  },
+  "license": "License",
+  "@license": {
+    "description": "License section"
+  },
+  "licenseInfo": "Licensed under GPL v3",
+  "@licenseInfo": {
+    "description": "License information"
+  },
+  "viewLicense": "View License",
+  "@viewLicense": {
+    "description": "View license link text"
+  },
+  "faq": "FAQ",
+  "@faq": {
+    "description": "FAQ section"
+  },
+  "faqTitle": "Frequently Asked Questions",
+  "@faqTitle": {
+    "description": "FAQ dialog title"
+  },
+  "faqQ1": "What is Flowlytics?",
+  "@faqQ1": {
+    "description": "FAQ question 1"
+  },
+  "faqA1": "Flowlytics is a suite of business analysis tools to promote Design Thinking and help entrepreneurs and business owners structure and analyze their business ideas using methodologies like Business Model Canvas, SWOT, Value Proposition Canvas, Team Canvas and Idea Napkin Canvas.",
+  "@faqA1": {
+    "description": "FAQ answer 1"
+  },
+  "faqQ2": "Is my data saved automatically?",
+  "@faqQ2": {
+    "description": "FAQ question 2"
+  },
+  "faqA2": "Yes, all tools save your progress automatically as you work. Data is stored locally on your device using SharedPreferences.",
+  "@faqA2": {
+    "description": "FAQ answer 2"
+  },
+  "faqQ3": "Can I use Flowlytics offline?",
+  "@faqQ3": {
+    "description": "FAQ question 3"
+  },
+  "faqA3": "Yes, Flowlytics works completely offline. You only need internet to download the app initially.",
+  "@faqA3": {
+    "description": "FAQ answer 3"
+  },
+  "faqQ4": "What platforms is it available on?",
+  "@faqQ4": {
+    "description": "FAQ question 4"
+  },
+  "faqA4": "Flowlytics is a cross-platform application compatible with Windows, macOS, Linux, Android and iOS.",
+  "@faqA4": {
+    "description": "FAQ answer 4"
+  },
+  "faqQ5": "Can I export my data?",
+  "@faqQ5": {
+    "description": "FAQ question 5"
+  },
+  "faqA5": "Currently data is saved locally. Future versions will include export and import options.",
+  "@faqA5": {
+    "description": "FAQ answer 5"
+  },
+  "faqQ6": "Is it free?",
+  "@faqQ6": {
+    "description": "FAQ question 6"
+  },
+  "faqA6": "Yes, Flowlytics is completely free and open source under GPL v3 license.",
+  "@faqA6": {
+    "description": "FAQ answer 6"
+  },
+  "faqQ7": "How can I participate in the community?",
+  "@faqQ7": {
+    "description": "FAQ question 7"
+  },
+  "faqA7": "You can participate in GitHub discussions, report bugs in Issues, suggest improvements or contribute to the code. Visit our discussion forum to connect with other users and report bugs in the Issues section.",
+  "@faqA7": {
+    "description": "FAQ answer 7"
+  },
+  "visitForum": "Visit Forum",
+  "@visitForum": {
+    "description": "Visit forum link text"
+  },
+  "reportIssue": "Report Bug",
+  "@reportIssue": {
+    "description": "Report issue link text"
   },
   "home": "Home",
   "@home": {
     "description": "Home navigation item"
+  },
+  "keyPartners": "Key Partners",
+  "@keyPartners": {
+    "description": "Business Model Canvas - Key Partners section"
+  },
+  "keyActivities": "Key Activities",
+  "@keyActivities": {
+    "description": "Business Model Canvas - Key Activities section"
+  },
+  "keyResources": "Key Resources",
+  "@keyResources": {
+    "description": "Business Model Canvas - Key Resources section"
+  },
+  "valuePropositions": "Value Propositions",
+  "@valuePropositions": {
+    "description": "Business Model Canvas - Value Propositions section"
+  },
+  "customerRelationships": "Customer Relationships",
+  "@customerRelationships": {
+    "description": "Business Model Canvas - Customer Relationships section"
+  },
+  "channels": "Channels",
+  "@channels": {
+    "description": "Business Model Canvas - Channels section"
+  },
+  "customerSegments": "Customer Segments",
+  "@customerSegments": {
+    "description": "Business Model Canvas - Customer Segments section"
+  },
+  "costStructure": "Cost Structure",
+  "@costStructure": {
+    "description": "Business Model Canvas - Cost Structure section"
+  },
+  "revenueStreams": "Revenue Streams",
+  "@revenueStreams": {
+    "description": "Business Model Canvas - Revenue Streams section"
+  },
+  "empty": "Empty",
+  "@empty": {
+    "description": "Text shown when a section is empty"
+  },
+  "more": "more",
+  "@more": {
+    "description": "Text shown for additional items in preview"
+  },
+  "canvasPreview": "Canvas Preview",
+  "@canvasPreview": {
+    "description": "Title for canvas preview dialog"
+  },
+  "automaticUpdate": "Automatic Update",
+  "@automaticUpdate": {
+    "description": "Subtitle for automatic update feature"
+  },
+  "liveUpdate": "Live",
+  "@liveUpdate": {
+    "description": "Live update indicator"
+  },
+  "viewUpdatedAutomatically": "View updated automatically",
+  "@viewUpdatedAutomatically": {
+    "description": "Information about automatic view updates"
+  },
+  "fullCanvasPreview": "Full canvas preview",
+  "@fullCanvasPreview": {
+    "description": "Tooltip for preview button"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Close button text"
+  },
+  "businessModelCanvasInfo": "Tool to design and visualize business models.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform",
+  "@businessModelCanvasInfo": {
+    "description": "Information text for Business Model Canvas"
+  },
+  "strengths": "Strengths",
+  "@strengths": {
+    "description": "SWOT Analysis - Strengths section"
+  },
+  "opportunities": "Opportunities", 
+  "@opportunities": {
+    "description": "SWOT Analysis - Opportunities section"
+  },
+  "weaknesses": "Weaknesses",
+  "@weaknesses": {
+    "description": "SWOT Analysis - Weaknesses section"
+  },
+  "threats": "Threats",
+  "@threats": {
+    "description": "SWOT Analysis - Threats section"
+  },
+  "swotPreview": "SWOT Preview",
+  "@swotPreview": {
+    "description": "Title for SWOT preview dialog"
+  },
+  "fullSwotPreview": "Full SWOT preview",
+  "@fullSwotPreview": {
+    "description": "Tooltip for SWOT preview button"
+  },
+  "swotAnalysisInfo": "Strategic tool to analyze internal and external factors.\n\nAdd elements in each quadrant and they will be saved automatically.\n\nFlutter Version - Multiplatform",
+  "@swotAnalysisInfo": {
+    "description": "Information text for SWOT Analysis"
+  },
+  "customerJobs": "Customer Jobs",
+  "@customerJobs": {
+    "description": "Value Proposition Canvas - Customer Jobs section"
+  },
+  "painPoints": "Pain Points",
+  "@painPoints": {
+    "description": "Value Proposition Canvas - Pain Points section"
+  },
+  "gainCreators": "Gain Creators",
+  "@gainCreators": {
+    "description": "Value Proposition Canvas - Gain Creators section"
+  },
+  "products": "Products & Services",
+  "@products": {
+    "description": "Value Proposition Canvas - Products section"
+  },
+  "painRelievers": "Pain Relievers",
+  "@painRelievers": {
+    "description": "Value Proposition Canvas - Pain Relievers section"
+  },
+  "gains": "Customer Gains",
+  "@gains": {
+    "description": "Value Proposition Canvas - Customer Gains section"
+  },
+  "valuePropositionPreview": "Value Proposition Preview",
+  "@valuePropositionPreview": {
+    "description": "Title for Value Proposition preview dialog"
+  },
+  "fullValuePropositionPreview": "Full Value Proposition preview",
+  "@fullValuePropositionPreview": {
+    "description": "Tooltip for Value Proposition preview button"
+  },
+  "valuePropositionCanvasInfo": "Visual tool to create products that customers really want.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform",
+  "@valuePropositionCanvasInfo": {
+    "description": "Information text for Value Proposition Canvas"
+  },
+  "people": "People",
+  "@people": {
+    "description": "Team Canvas - People section"
+  },
+  "purpose": "Purpose & Mission",
+  "@purpose": {
+    "description": "Team Canvas - Purpose section"
+  },
+  "personality": "Personality & Culture",
+  "@personality": {
+    "description": "Team Canvas - Personality section"
+  },
+  "rules": "Rules & Activities",
+  "@rules": {
+    "description": "Team Canvas - Rules section"
+  },
+  "roles": "Roles & Skills",
+  "@roles": {
+    "description": "Team Canvas - Roles section"
+  },
+  "rituals": "Rituals & Meetings",
+  "@rituals": {
+    "description": "Team Canvas - Rituals section"
+  },
+  "teamPreview": "Team Preview",
+  "@teamPreview": {
+    "description": "Title for Team preview dialog"
+  },
+  "fullTeamPreview": "Full Team preview",
+  "@fullTeamPreview": {
+    "description": "Tooltip for Team preview button"
+  },
+  "teamCanvasInfo": "Tool to align teams by defining roles, purpose and ways of working.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform",
+  "@teamCanvasInfo": {
+    "description": "Information text for Team Canvas"
+  },
+  "problems": "Problems",
+  "@problems": {
+    "description": "Idea Napkin Canvas - Problems section"
+  },
+  "solutions": "Solution Ideas",
+  "@solutions": {
+    "description": "Idea Napkin Canvas - Solutions section"
+  },
+  "keyMetrics": "Key Metrics",
+  "@keyMetrics": {
+    "description": "Idea Napkin Canvas - Key Metrics section"
+  },
+  "uniqueValueProposition": "Unique Value Proposition",
+  "@uniqueValueProposition": {
+    "description": "Idea Napkin Canvas - Unique Value Proposition section"
+  },
+  "unfairAdvantage": "Unfair Advantage",
+  "@unfairAdvantage": {
+    "description": "Idea Napkin Canvas - Unfair Advantage section"
+  },
+  "ideaPreview": "Idea Preview",
+  "@ideaPreview": {
+    "description": "Title for Idea Napkin preview dialog"
+  },
+  "fullIdeaPreview": "Full Idea preview",
+  "@fullIdeaPreview": {
+    "description": "Tooltip for Idea Napkin preview button"
+  },
+  "ideaNapkinCanvasInfo": "Simple tool to structure ideas with value formula and sketch.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform",
+  "@ideaNapkinCanvasInfo": {
+    "description": "Information text for Idea Napkin Canvas"
+  },
+  "ideaTitle": "Idea Title",
+  "@ideaTitle": {
+    "description": "Title for idea title section"
+  },
+  "ideaTitleHint": "Enter your idea title...",
+  "@ideaTitleHint": {
+    "description": "Hint text for idea title input"
+  },
+  "shortDescription": "Short Description",
+  "@shortDescription": {
+    "description": "Title for short description section"
+  },
+  "shortDescriptionHint": "Briefly describe your idea...",
+  "@shortDescriptionHint": {
+    "description": "Hint text for description input"
+  },
+  "targetAudience": "Target Audience",
+  "@targetAudience": {
+    "description": "Title for target audience section"
+  },
+  "targetAudienceHint": "Who is this idea for?",
+  "@targetAudienceHint": {
+    "description": "Hint text for audience input"
+  },
+  "innovationAspect": "Innovation Aspect",
+  "@innovationAspect": {
+    "description": "Title for innovation aspect section"
+  },
+  "innovationAspectHint": "What makes your idea unique?",
+  "@innovationAspectHint": {
+    "description": "Hint text for innovation input"
+  },
+  "valueFormula": "Value Formula",
+  "@valueFormula": {
+    "description": "Title for value formula section"
+  },
+  "businessValue": "Business Value",
+  "@businessValue": {
+    "description": "Label for business value input"
+  },
+  "innovationPower": "Innovation Power",
+  "@innovationPower": {
+    "description": "Label for innovation power input"
+  },
+  "userValue": "User Value",
+  "@userValue": {
+    "description": "Label for user value input"
+  },
+  "ideaSketch": "Idea Sketch",
+  "@ideaSketch": {
+    "description": "Title for sketch section"
+  },
+  "clearCanvas": "Clear Canvas",
+  "@clearCanvas": {
+    "description": "Title for clear canvas dialog"
+  },
+  "clearCanvasConfirm": "Are you sure you want to clear all content from the Idea Napkin Canvas?",
+  "@clearCanvasConfirm": {
+    "description": "Confirmation message for clearing canvas"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "clear": "Clear",
+  "@clear": {
+    "description": "Clear button text"
+  },
+  "canvasSaved": "Canvas saved automatically",
+  "@canvasSaved": {
+    "description": "Message shown when canvas is saved"
+  },
+  "productsDescription": "List of products and services you offer",
+  "@productsDescription": {
+    "description": "Description for products section"
+  },
+  "painRelieversDescription": "How you alleviate customer frustrations",
+  "@painRelieversDescription": {
+    "description": "Description for pain relievers section"
+  },
+  "gainCreatorsDescription": "How you create joy for the customer",
+  "@gainCreatorsDescription": {
+    "description": "Description for gain creators section"
+  },
+  "customerJobsDescription": "What tasks the customer is trying to accomplish",
+  "@customerJobsDescription": {
+    "description": "Description for customer jobs section"
+  },
+  "painsDescription": "What frustrates or bothers the customer",
+  "@painsDescription": {
+    "description": "Description for pains section"
+  },
+  "gainsDescription": "What excites or benefits the customer",
+  "@gainsDescription": {
+    "description": "Description for gains section"
   }
 }

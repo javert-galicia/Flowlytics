@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'business_model_canvas_page.dart';
 import 'foda_analysis_page.dart';
 import 'value_proposition_canvas_page.dart';
@@ -19,29 +20,36 @@ class HomePage extends StatelessWidget {
       backgroundColor: AppTheme.backgroundLight,
       appBar: AppBar(
         title: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               width: 40,
               height: 40,
               decoration: const BoxDecoration(
-                gradient: AppTheme.primaryGradient,
+                color: Colors.white,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
-                Icons.analytics_outlined,
-                color: Colors.white,
-                size: 24,
+              child: ClipOval(
+                child: Image.asset(
+                  'assets/logo_400.png',
+                  width: 40,
+                  height: 40,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(width: 12),
-            Text(
-              'FLOWLYTICS',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontFamily: 'Lato',
-                fontWeight: FontWeight.w800,
-                fontSize: 20,
-                letterSpacing: 1.2,
-                color: AppTheme.gray900,
+            Flexible(
+              child: Text(
+                'FLOWLYTICS',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.w800,
+                  fontSize: 20,
+                  letterSpacing: 1.2,
+                  color: AppTheme.gray900,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
@@ -85,9 +93,17 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () => _showAboutDialog(context),
+            tooltip: AppLocalizations.of(context)!.about,
+          ),
         ],
       ),
-      drawer: const AppNavigationDrawer(selectedIndex: 0),
+      drawer: AppNavigationDrawer(
+        selectedIndex: 0,
+        onFaqPressed: () => _showFaqDialog(context),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
@@ -101,11 +117,7 @@ class HomePage extends StatelessWidget {
                     width: 120,
                     height: 120,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.blue.shade600, Colors.purple.shade600],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
+                      color: Colors.white,
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
@@ -115,10 +127,13 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: const Icon(
-                      Icons.business_center,
-                      size: 60,
-                      color: Colors.white,
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/logo_400.png',
+                        width: 120,
+                        height: 120,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -446,5 +461,252 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _showFaqDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        final screenWidth = MediaQuery.of(context).size.width;
+        final isSmallScreen = screenWidth < 400;
+        
+        return AlertDialog(
+          contentPadding: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.help_outline,
+                color: Theme.of(context).primaryColor,
+                size: isSmallScreen ? 24 : 28,
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  AppLocalizations.of(context)!.faqTitle,
+                  style: TextStyle(
+                    fontSize: isSmallScreen ? 18 : 20,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          content: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.7,
+              maxWidth: isSmallScreen ? screenWidth * 0.9 : 500,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildFaqItem(context, isSmallScreen, 
+                    AppLocalizations.of(context)!.faqQ1, 
+                    AppLocalizations.of(context)!.faqA1),
+                  _buildFaqItem(context, isSmallScreen, 
+                    AppLocalizations.of(context)!.faqQ2, 
+                    AppLocalizations.of(context)!.faqA2),
+                  _buildFaqItem(context, isSmallScreen, 
+                    AppLocalizations.of(context)!.faqQ3, 
+                    AppLocalizations.of(context)!.faqA3),
+                  _buildFaqItem(context, isSmallScreen, 
+                    AppLocalizations.of(context)!.faqQ4, 
+                    AppLocalizations.of(context)!.faqA4),
+                  _buildFaqItem(context, isSmallScreen, 
+                    AppLocalizations.of(context)!.faqQ5, 
+                    AppLocalizations.of(context)!.faqA5),
+                  _buildFaqItem(context, isSmallScreen, 
+                    AppLocalizations.of(context)!.faqQ6, 
+                    AppLocalizations.of(context)!.faqA6),
+                  _buildFaqItem(context, isSmallScreen, 
+                    AppLocalizations.of(context)!.faqQ7, 
+                    AppLocalizations.of(context)!.faqA7),
+                ],
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(AppLocalizations.of(context)!.close),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showAboutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        final screenWidth = MediaQuery.of(context).size.width;
+        final isSmallScreen = screenWidth < 400;
+        
+        return AlertDialog(
+          contentPadding: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: isSmallScreen ? 32 : 40,
+                height: isSmallScreen ? 32 : 40,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: ClipOval(
+                  child: Image.asset(
+                    'assets/logo_400.png',
+                    width: isSmallScreen ? 32 : 40,
+                    height: isSmallScreen ? 32 : 40,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  AppLocalizations.of(context)!.aboutTitle,
+                  style: TextStyle(
+                    fontSize: isSmallScreen ? 18 : 20,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          content: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.6,
+              maxWidth: isSmallScreen ? screenWidth * 0.85 : 400,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.aboutDescription,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: isSmallScreen ? 13 : 14,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    AppLocalizations.of(context)!.developedBy,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      fontSize: isSmallScreen ? 13 : 14,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    AppLocalizations.of(context)!.licenseInfo,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppTheme.gray600,
+                      fontSize: isSmallScreen ? 12 : 14,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Wrap(
+                    spacing: isSmallScreen ? 4 : 8,
+                    runSpacing: isSmallScreen ? 4 : 8,
+                    children: [
+                      _buildCompactButton(context, isSmallScreen, Icons.code, 
+                        AppLocalizations.of(context)!.visitGithub,
+                        'https://github.com/javert-galicia/Flowlytics'),
+                      _buildCompactButton(context, isSmallScreen, Icons.web,
+                        AppLocalizations.of(context)!.visitWebsite,
+                        'https://www.jgalicia.com/'),
+                      _buildCompactButton(context, isSmallScreen, Icons.article,
+                        AppLocalizations.of(context)!.viewLicense,
+                        'https://github.com/javert-galicia/Flowlytics/blob/main/LICENSE'),
+                      _buildCompactButton(context, isSmallScreen, Icons.bug_report,
+                        AppLocalizations.of(context)!.reportIssue,
+                        'https://github.com/javert-galicia/Flowlytics/issues'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(AppLocalizations.of(context)!.close),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildFaqItem(BuildContext context, bool isSmallScreen, 
+      String question, String answer) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: ExpansionTile(
+        title: Text(
+          question,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontSize: isSmallScreen ? 13 : 14,
+            fontWeight: FontWeight.w600,
+            color: AppTheme.gray800,
+          ),
+        ),
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: Text(
+              answer,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontSize: isSmallScreen ? 12 : 13,
+                color: AppTheme.gray600,
+                height: 1.4,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCompactButton(BuildContext context, bool isSmallScreen, 
+      IconData icon, String label, String url) {
+    return SizedBox(
+      height: isSmallScreen ? 32 : 36,
+      child: TextButton.icon(
+        onPressed: () => _launchUrl(url),
+        icon: Icon(icon, size: isSmallScreen ? 16 : 18),
+        label: Text(
+          label,
+          style: TextStyle(
+            fontSize: isSmallScreen ? 11 : 12,
+          ),
+          overflow: TextOverflow.ellipsis,
+        ),
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.symmetric(
+            horizontal: isSmallScreen ? 8 : 12,
+            vertical: isSmallScreen ? 4 : 8,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }

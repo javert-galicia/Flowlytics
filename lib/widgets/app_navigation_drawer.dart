@@ -9,10 +9,12 @@ import '../l10n/app_localizations.dart';
 
 class AppNavigationDrawer extends StatelessWidget {
   final int selectedIndex;
+  final VoidCallback? onFaqPressed;
   
   const AppNavigationDrawer({
     super.key,
     this.selectedIndex = 0,
+    this.onFaqPressed,
   });
 
   @override
@@ -37,17 +39,20 @@ class AppNavigationDrawer extends StatelessWidget {
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white,
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: Colors.white.withOpacity(0.3),
                     width: 2,
                   ),
                 ),
-                child: const Icon(
-                  Icons.analytics_outlined,
-                  color: Colors.white,
-                  size: 40,
+                child: ClipOval(
+                  child: Image.asset(
+                    'assets/logo_400.png',
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               const SizedBox(height: 16),
@@ -113,6 +118,31 @@ class AppNavigationDrawer extends StatelessWidget {
         ),
         
         const Divider(),
+        
+        // Botón FAQ
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: SizedBox(
+            width: double.infinity,
+            child: TextButton.icon(
+              onPressed: () {
+                Navigator.pop(context); // Cerrar drawer
+                if (onFaqPressed != null) {
+                  onFaqPressed!();
+                }
+              },
+              icon: Icon(Icons.help_outline, color: Colors.grey.shade600),
+              label: Text(
+                AppLocalizations.of(context)!.faq,
+                style: TextStyle(color: Colors.grey.shade700),
+              ),
+              style: TextButton.styleFrom(
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              ),
+            ),
+          ),
+        ),
         
         const Padding(
           padding: EdgeInsets.all(16),
