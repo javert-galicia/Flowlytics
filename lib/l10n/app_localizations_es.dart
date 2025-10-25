@@ -150,18 +150,11 @@ class AppLocalizationsEs extends AppLocalizations {
       'Actualmente los datos se guardan localmente. En futuras versiones se planea agregar opciones de exportación e importación.';
 
   @override
-  String get faqQ6 => '¿Es gratuito?';
+  String get faqQ6 => '¿Cómo puedo participar en la comunidad?';
 
   @override
   String get faqA6 =>
-      'Sí, Flowlytics es completamente gratuito y de código abierto bajo licencia GPL v3.';
-
-  @override
-  String get faqQ7 => '¿Cómo puedo participar en la comunidad?';
-
-  @override
-  String get faqA7 =>
-      'Puedes participar en las discusiones de GitHub, reportar errores en Issues, sugerir mejoras o contribuir al código. Visita nuestro foro de discusiones para conectar con otros usuarios y reporta bugs en la sección de Issues.';
+      'Puedes participar en las discusiones de GitHub (https://github.com/javert-galicia/Flowlytics/issues), reportar errores en Issues (https://github.com/javert-galicia/Flowlytics/issues), sugerir mejoras o contribuir al código. Conecta con otros usuarios en nuestro foro y reporta bugs directamente en GitHub.';
 
   @override
   String get visitForum => 'Visitar Foro';
@@ -225,7 +218,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get businessModelCanvasInfo =>
-      'Herramienta para diseñar y visualizar modelos de negocio.\n\nAñade elementos en cada sección y estos se guardarán automáticamente.\n\nVersión Flutter - Multiplataforma';
+      'Herramienta para diseñar y visualizar modelos de negocio.\n\nAñade elementos en cada sección y estos se guardarán automáticamente.\n\nFlowlytics por Javier Galicia';
 
   @override
   String get strengths => 'Fortalezas';
@@ -247,7 +240,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get swotAnalysisInfo =>
-      'Herramienta estratégica para analizar factores internos y externos.\n\nAñade elementos en cada cuadrante y estos se guardarán automáticamente.\n\nVersión Flutter - Multiplataforma';
+      'Herramienta estratégica para analizar factores internos y externos.\n\nAñade elementos en cada cuadrante y estos se guardarán automáticamente.\n\nFlowlytics por Javier Galicia';
 
   @override
   String get customerJobs => 'Trabajos del Cliente';
@@ -276,7 +269,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get valuePropositionCanvasInfo =>
-      'Herramienta visual para crear productos que los clientes realmente quieren.\n\nAñade elementos en cada sección y estos se guardarán automáticamente.\n\nVersión Flutter - Multiplataforma';
+      'Herramienta visual para crear productos que los clientes realmente quieren.\n\nAñade elementos en cada sección y estos se guardarán automáticamente.\n\nFlowlytics por Javier Galicia';
 
   @override
   String get people => 'Personas';
@@ -304,7 +297,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get teamCanvasInfo =>
-      'Herramienta para alinear equipos definiendo roles, propósito y formas de trabajo.\n\nAñade elementos en cada sección y estos se guardarán automáticamente.\n\nVersión Flutter - Multiplataforma';
+      'Herramienta para alinear equipos definiendo roles, propósito y formas de trabajo.\n\nAñade elementos en cada sección y estos se guardarán automáticamente.\n\nFlowlytics por Javier Galicia';
 
   @override
   String get problems => 'Problemas';
@@ -329,7 +322,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get ideaNapkinCanvasInfo =>
-      'Herramienta simple para estructurar ideas con fórmula de valor y boceto.\n\nAgregar elementos en cada sección y se guardarán automáticamente.\n\nVersión Flutter - Multiplataforma';
+      'Herramienta simple para estructurar ideas con fórmula de valor y boceto.\n\nAgregar elementos en cada sección y se guardarán automáticamente.\n\nFlowlytics por Javier Galicia';
 
   @override
   String get ideaTitle => 'Título de la Idea';

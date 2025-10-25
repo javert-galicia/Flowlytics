@@ -163,21 +163,13 @@
   "@faqA5": {
     "description": "FAQ answer 5"
   },
-  "faqQ6": "Is it free?",
+  "faqQ6": "How can I participate in the community?",
   "@faqQ6": {
     "description": "FAQ question 6"
   },
-  "faqA6": "Yes, Flowlytics is completely free and open source under GPL v3 license.",
+  "faqA6": "You can participate in GitHub discussions (https://github.com/javert-galicia/Flowlytics/issues), report bugs in Issues (https://github.com/javert-galicia/Flowlytics/issues), suggest improvements or contribute to the code. Connect with other users in our forum and report bugs directly on GitHub.",
   "@faqA6": {
     "description": "FAQ answer 6"
-  },
-  "faqQ7": "How can I participate in the community?",
-  "@faqQ7": {
-    "description": "FAQ question 7"
-  },
-  "faqA7": "You can participate in GitHub discussions, report bugs in Issues, suggest improvements or contribute to the code. Visit our discussion forum to connect with other users and report bugs in the Issues section.",
-  "@faqA7": {
-    "description": "FAQ answer 7"
   },
   "visitForum": "Visit Forum",
   "@visitForum": {
@@ -259,7 +251,7 @@
   "@close": {
     "description": "Close button text"
   },
-  "businessModelCanvasInfo": "Tool to design and visualize business models.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform",
+  "businessModelCanvasInfo": "Tool to design and visualize business models.\n\nAdd elements in each section and they will be saved automatically.\n\nFlowlytics by Javier Galicia",
   "@businessModelCanvasInfo": {
     "description": "Information text for Business Model Canvas"
   },
@@ -287,7 +279,7 @@
   "@fullSwotPreview": {
     "description": "Tooltip for SWOT preview button"
   },
-  "swotAnalysisInfo": "Strategic tool to analyze internal and external factors.\n\nAdd elements in each quadrant and they will be saved automatically.\n\nFlutter Version - Multiplatform",
+  "swotAnalysisInfo": "Strategic tool to analyze internal and external factors.\n\nAdd elements in each quadrant and they will be saved automatically.\n\nFlowlytics by Javier Galicia",
   "@swotAnalysisInfo": {
     "description": "Information text for SWOT Analysis"
   },
@@ -323,7 +315,7 @@
   "@fullValuePropositionPreview": {
     "description": "Tooltip for Value Proposition preview button"
   },
-  "valuePropositionCanvasInfo": "Visual tool to create products that customers really want.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform",
+  "valuePropositionCanvasInfo": "Visual tool to create products that customers really want.\n\nAdd elements in each section and they will be saved automatically.\n\nFlowlytics by Javier Galicia",
   "@valuePropositionCanvasInfo": {
     "description": "Information text for Value Proposition Canvas"
   },
@@ -359,7 +351,7 @@
   "@fullTeamPreview": {
     "description": "Tooltip for Team preview button"
   },
-  "teamCanvasInfo": "Tool to align teams by defining roles, purpose and ways of working.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform",
+  "teamCanvasInfo": "Tool to align teams by defining roles, purpose and ways of working.\n\nAdd elements in each section and they will be saved automatically.\n\nFlowlytics by Javier Galicia",
   "@teamCanvasInfo": {
     "description": "Information text for Team Canvas"
   },
@@ -391,7 +383,7 @@
   "@fullIdeaPreview": {
     "description": "Tooltip for Idea Napkin preview button"
   },
-  "ideaNapkinCanvasInfo": "Simple tool to structure ideas with value formula and sketch.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform",
+  "ideaNapkinCanvasInfo": "Simple tool to structure ideas with value formula and sketch.\n\nAdd elements in each section and they will be saved automatically.\n\nFlowlytics by Javier Galicia",
   "@ideaNapkinCanvasInfo": {
     "description": "Information text for Idea Napkin Canvas"
   },

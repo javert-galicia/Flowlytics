@@ -149,18 +149,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Currently data is saved locally. Future versions will include export and import options.';
 
   @override
-  String get faqQ6 => 'Is it free?';
+  String get faqQ6 => 'How can I participate in the community?';
 
   @override
   String get faqA6 =>
-      'Yes, Flowlytics is completely free and open source under GPL v3 license.';
-
-  @override
-  String get faqQ7 => 'How can I participate in the community?';
-
-  @override
-  String get faqA7 =>
-      'You can participate in GitHub discussions, report bugs in Issues, suggest improvements or contribute to the code. Visit our discussion forum to connect with other users and report bugs in the Issues section.';
+      'You can participate in GitHub discussions (https://github.com/javert-galicia/Flowlytics/issues), report bugs in Issues (https://github.com/javert-galicia/Flowlytics/issues), suggest improvements or contribute to the code. Connect with other users in our forum and report bugs directly on GitHub.';
 
   @override
   String get visitForum => 'Visit Forum';
@@ -224,7 +217,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get businessModelCanvasInfo =>
-      'Tool to design and visualize business models.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform';
+      'Tool to design and visualize business models.\n\nAdd elements in each section and they will be saved automatically.\n\nFlowlytics by Javier Galicia';
 
   @override
   String get strengths => 'Strengths';
@@ -246,7 +239,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get swotAnalysisInfo =>
-      'Strategic tool to analyze internal and external factors.\n\nAdd elements in each quadrant and they will be saved automatically.\n\nFlutter Version - Multiplatform';
+      'Strategic tool to analyze internal and external factors.\n\nAdd elements in each quadrant and they will be saved automatically.\n\nFlowlytics by Javier Galicia';
 
   @override
   String get customerJobs => 'Customer Jobs';
@@ -274,7 +267,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get valuePropositionCanvasInfo =>
-      'Visual tool to create products that customers really want.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform';
+      'Visual tool to create products that customers really want.\n\nAdd elements in each section and they will be saved automatically.\n\nFlowlytics by Javier Galicia';
 
   @override
   String get people => 'People';
@@ -302,7 +295,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get teamCanvasInfo =>
-      'Tool to align teams by defining roles, purpose and ways of working.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform';
+      'Tool to align teams by defining roles, purpose and ways of working.\n\nAdd elements in each section and they will be saved automatically.\n\nFlowlytics by Javier Galicia';
 
   @override
   String get problems => 'Problems';
@@ -327,7 +320,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ideaNapkinCanvasInfo =>
-      'Simple tool to structure ideas with value formula and sketch.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform';
+      'Simple tool to structure ideas with value formula and sketch.\n\nAdd elements in each section and they will be saved automatically.\n\nFlowlytics by Javier Galicia';
 
   @override
   String get ideaTitle => 'Idea Title';

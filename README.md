@@ -1,4 +1,8 @@
-# 📊 Flowlytics
+# Flowlytics
+
+<div align="center">
+  <img src="assets/logo_400.png" alt="Flowlytics Logo" width="200"/>
+</div>
 
 **Herramientas de Análisis Empresarial desarrolladas con Flutter**
 

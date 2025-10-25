@@ -347,26 +347,14 @@ abstract class AppLocalizations {
   /// FAQ question 6
   ///
   /// In en, this message translates to:
-  /// **'Is it free?'**
+  /// **'How can I participate in the community?'**
   String get faqQ6;
 
   /// FAQ answer 6
   ///
   /// In en, this message translates to:
-  /// **'Yes, Flowlytics is completely free and open source under GPL v3 license.'**
+  /// **'You can participate in GitHub discussions (https://github.com/javert-galicia/Flowlytics/issues), report bugs in Issues (https://github.com/javert-galicia/Flowlytics/issues), suggest improvements or contribute to the code. Connect with other users in our forum and report bugs directly on GitHub.'**
   String get faqA6;
-
-  /// FAQ question 7
-  ///
-  /// In en, this message translates to:
-  /// **'How can I participate in the community?'**
-  String get faqQ7;
-
-  /// FAQ answer 7
-  ///
-  /// In en, this message translates to:
-  /// **'You can participate in GitHub discussions, report bugs in Issues, suggest improvements or contribute to the code. Visit our discussion forum to connect with other users and report bugs in the Issues section.'**
-  String get faqA7;
 
   /// Visit forum link text
   ///
@@ -491,7 +479,7 @@ abstract class AppLocalizations {
   /// Information text for Business Model Canvas
   ///
   /// In en, this message translates to:
-  /// **'Tool to design and visualize business models.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform'**
+  /// **'Tool to design and visualize business models.\n\nAdd elements in each section and they will be saved automatically.\n\nFlowlytics by Javier Galicia'**
   String get businessModelCanvasInfo;
 
   /// SWOT Analysis - Strengths section
@@ -533,7 +521,7 @@ abstract class AppLocalizations {
   /// Information text for SWOT Analysis
   ///
   /// In en, this message translates to:
-  /// **'Strategic tool to analyze internal and external factors.\n\nAdd elements in each quadrant and they will be saved automatically.\n\nFlutter Version - Multiplatform'**
+  /// **'Strategic tool to analyze internal and external factors.\n\nAdd elements in each quadrant and they will be saved automatically.\n\nFlowlytics by Javier Galicia'**
   String get swotAnalysisInfo;
 
   /// Value Proposition Canvas - Customer Jobs section
@@ -587,7 +575,7 @@ abstract class AppLocalizations {
   /// Information text for Value Proposition Canvas
   ///
   /// In en, this message translates to:
-  /// **'Visual tool to create products that customers really want.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform'**
+  /// **'Visual tool to create products that customers really want.\n\nAdd elements in each section and they will be saved automatically.\n\nFlowlytics by Javier Galicia'**
   String get valuePropositionCanvasInfo;
 
   /// Team Canvas - People section
@@ -641,7 +629,7 @@ abstract class AppLocalizations {
   /// Information text for Team Canvas
   ///
   /// In en, this message translates to:
-  /// **'Tool to align teams by defining roles, purpose and ways of working.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform'**
+  /// **'Tool to align teams by defining roles, purpose and ways of working.\n\nAdd elements in each section and they will be saved automatically.\n\nFlowlytics by Javier Galicia'**
   String get teamCanvasInfo;
 
   /// Idea Napkin Canvas - Problems section
@@ -689,7 +677,7 @@ abstract class AppLocalizations {
   /// Information text for Idea Napkin Canvas
   ///
   /// In en, this message translates to:
-  /// **'Simple tool to structure ideas with value formula and sketch.\n\nAdd elements in each section and they will be saved automatically.\n\nFlutter Version - Multiplatform'**
+  /// **'Simple tool to structure ideas with value formula and sketch.\n\nAdd elements in each section and they will be saved automatically.\n\nFlowlytics by Javier Galicia'**
   String get ideaNapkinCanvasInfo;
 
   /// Title for idea title section
