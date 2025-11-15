@@ -18,7 +18,7 @@ Flowlytics es una aplicación móvil y de escritorio que proporciona herramienta
 
 <div align="center">
 
-[<img src="https://get.microsoft.com/Button/GetItFromMicrosoftStore_SVG.svg" width="200"/>](https://apps.microsoft.com/store/detail/9PPS18TJD2QH?cid=DevShareMCLPCS)
+[<img src="https://img.shields.io/badge/Microsoft%20Store-Download-blue?style=for-the-badge&logo=microsoft&logoColor=white" width="200"/>](https://apps.microsoft.com/store/detail/9PPS18TJD2QH?cid=DevShareMCLPCS)
 
 [<img src="https://play.google.com/intl/es/badges/images/generic/es_badge_web_generic.png" width="200"/>](https://play.google.com/store/apps/details?id=com.jgalicia.flowlytics)
 
