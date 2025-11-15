@@ -12,6 +12,18 @@ Flowlytics es una aplicación móvil y de escritorio que proporciona herramienta
 ![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
 ![License](https://img.shields.io/badge/License-GPL%20v3-blue?style=for-the-badge)
 
+## 📥 Descargar Ahora
+
+¡Flowlytics ahora está disponible en las principales tiendas de aplicaciones!
+
+<div align="center">
+
+[<img src="https://get.microsoft.com/Button/GetItFromMicrosoftStore_SVG.svg" width="200"/>](https://apps.microsoft.com/store/detail/9PPS18TJD2QH?cid=DevShareMCLPCS)
+
+[<img src="https://play.google.com/intl/es/badges/images/generic/es_badge_web_generic.png" width="200"/>](https://play.google.com/store/apps/details?id=com.jgalicia.flowlytics)
+
+</div>
+
 ## ✨ Características Principales
 
 - 🎨 **Interfaz Intuitiva**: Diseño moderno y fácil de usar
@@ -64,7 +76,17 @@ Captura y valida ideas de negocio de forma rápida:
 
 ## 🚀 Instalación y Configuración
 
-### Prerrequisitos
+### Instalación desde Tiendas Oficiales (Recomendado)
+
+**Microsoft Store (Windows):**
+- [Descarga desde Microsoft Store](https://apps.microsoft.com/store/detail/9PPS18TJD2QH?cid=DevShareMCLPCS)
+
+**Google Play Store (Android):**
+- [Descarga desde Google Play Store](https://play.google.com/store/apps/details?id=com.jgalicia.flowlytics)
+
+### Instalación desde Código Fuente
+
+#### Prerrequisitos
 
 - Flutter SDK 3.9.2 o superior
 - Dart SDK

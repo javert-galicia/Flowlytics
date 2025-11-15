@@ -1,7 +1,7 @@
 name: flowlytics
-description: "Flowlytics - Herramientas de Análisis Empresarial con Flutter"
+description: "Flowlytics - Herramientas de Análisis Empresarial"
 publish_to: 'none'
-version: 0.1.0
+version: 0.1.0+2
 
 environment:
   sdk: ^3.9.2

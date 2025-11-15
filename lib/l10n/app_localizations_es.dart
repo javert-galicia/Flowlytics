@@ -290,6 +290,24 @@ class AppLocalizationsEs extends AppLocalizations {
   String get rituals => 'Rituales y Reuniones';
 
   @override
+  String get activities => 'Actividades';
+
+  @override
+  String get personalGoals => 'Objetivos Personales';
+
+  @override
+  String get skills => 'Habilidades';
+
+  @override
+  String get tools => 'Herramientas';
+
+  @override
+  String get network => 'Red';
+
+  @override
+  String get values => 'Valores';
+
+  @override
   String get teamPreview => 'Vista previa del Equipo';
 
   @override

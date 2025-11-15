@@ -288,6 +288,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rituals => 'Rituals & Meetings';
 
   @override
+  String get activities => 'Activities';
+
+  @override
+  String get personalGoals => 'Personal Goals';
+
+  @override
+  String get skills => 'Skills';
+
+  @override
+  String get tools => 'Tools';
+
+  @override
+  String get network => 'Network';
+
+  @override
+  String get values => 'Values';
+
+  @override
   String get teamPreview => 'Team Preview';
 
   @override

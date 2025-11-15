@@ -614,6 +614,42 @@ abstract class AppLocalizations {
   /// **'Rituals & Meetings'**
   String get rituals;
 
+  /// Team Canvas - Activities section
+  ///
+  /// In en, this message translates to:
+  /// **'Activities'**
+  String get activities;
+
+  /// Team Canvas - Personal Goals section
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Goals'**
+  String get personalGoals;
+
+  /// Team Canvas - Skills section
+  ///
+  /// In en, this message translates to:
+  /// **'Skills'**
+  String get skills;
+
+  /// Team Canvas - Tools section
+  ///
+  /// In en, this message translates to:
+  /// **'Tools'**
+  String get tools;
+
+  /// Team Canvas - Network section
+  ///
+  /// In en, this message translates to:
+  /// **'Network'**
+  String get network;
+
+  /// Team Canvas - Values section
+  ///
+  /// In en, this message translates to:
+  /// **'Values'**
+  String get values;
+
   /// Title for Team preview dialog
   ///
   /// In en, this message translates to:

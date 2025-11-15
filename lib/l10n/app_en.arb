@@ -343,6 +343,30 @@
   "@rituals": {
     "description": "Team Canvas - Rituals section"
   },
+  "activities": "Activities",
+  "@activities": {
+    "description": "Team Canvas - Activities section"
+  },
+  "personalGoals": "Personal Goals",
+  "@personalGoals": {
+    "description": "Team Canvas - Personal Goals section"
+  },
+  "skills": "Skills",
+  "@skills": {
+    "description": "Team Canvas - Skills section"
+  },
+  "tools": "Tools",
+  "@tools": {
+    "description": "Team Canvas - Tools section"
+  },
+  "network": "Network",
+  "@network": {
+    "description": "Team Canvas - Network section"
+  },
+  "values": "Values",
+  "@values": {
+    "description": "Team Canvas - Values section"
+  },
   "teamPreview": "Team Preview",
   "@teamPreview": {
     "description": "Title for Team preview dialog"

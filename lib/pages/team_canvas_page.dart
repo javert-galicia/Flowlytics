@@ -65,16 +65,22 @@ class _TeamCanvasPageState extends State<TeamCanvasPage> {
     switch (id) {
       case 'people':
         return localizations.people;
+      case 'activities':
+        return localizations.activities;
+      case 'personalGoals':
+        return localizations.personalGoals;
       case 'purpose':
         return localizations.purpose;
-      case 'personality':
-        return localizations.personality;
       case 'rules':
         return localizations.rules;
-      case 'roles':
-        return localizations.roles;
-      case 'rituals':
-        return localizations.rituals;
+      case 'skills':
+        return localizations.skills;
+      case 'tools':
+        return localizations.tools;
+      case 'network':
+        return localizations.network;
+      case 'values':
+        return localizations.values;
       default:
         return id;
     }
@@ -86,48 +92,72 @@ class _TeamCanvasPageState extends State<TeamCanvasPage> {
       'title': _getLocalizedTitle(context, 'people'),
       'subtitle': '¿Quién forma parte del equipo?',
       'color': Colors.blue.shade400,
-      'icon': Icons.people,
+      'icon': Icons.group,
       'description': 'Miembros del equipo, roles, responsabilidades',
+    },
+    {
+      'id': 'activities',
+      'title': _getLocalizedTitle(context, 'activities'),
+      'subtitle': '¿Qué hacemos como equipo?',
+      'color': Colors.green.shade400,
+      'icon': Icons.directions_run,
+      'description': 'Actividades principales del equipo',
+    },
+    {
+      'id': 'personalGoals',
+      'title': _getLocalizedTitle(context, 'personalGoals'),
+      'subtitle': '¿Cuáles son nuestros objetivos individuales?',
+      'color': Colors.amber.shade400,
+      'icon': Icons.emoji_events,
+      'description': 'Objetivos y metas personales',
     },
     {
       'id': 'purpose',
       'title': _getLocalizedTitle(context, 'purpose'),
       'subtitle': '¿Por qué existimos como equipo?',
       'color': Colors.purple.shade400,
-      'icon': Icons.explore,
+      'icon': Icons.center_focus_strong,
       'description': 'Misión, visión, razón de ser del equipo',
-    },
-    {
-      'id': 'personality',
-      'title': _getLocalizedTitle(context, 'personality'),
-      'subtitle': '¿Cómo somos como equipo?',
-      'color': Colors.orange.shade400,
-      'icon': Icons.psychology,
-      'description': 'Personalidad, cultura, valores del equipo',
     },
     {
       'id': 'rules',
       'title': _getLocalizedTitle(context, 'rules'),
       'subtitle': '¿Cómo trabajamos juntos?',
       'color': Colors.red.shade400,
-      'icon': Icons.rule,
+      'icon': Icons.gavel,
       'description': 'Normas, reglas, comportamientos',
     },
     {
-      'id': 'roles',
-      'title': _getLocalizedTitle(context, 'roles'),
-      'subtitle': '¿Qué roles y habilidades tenemos?',
-      'color': Colors.teal.shade400,
-      'icon': Icons.work,
-      'description': 'Roles, responsabilidades, habilidades',
+      'id': 'skills',
+      'title': _getLocalizedTitle(context, 'skills'),
+      'subtitle': '¿Qué habilidades tenemos?',
+      'color': Colors.cyan.shade400,
+      'icon': Icons.lightbulb,
+      'description': 'Habilidades y competencias del equipo',
     },
     {
-      'id': 'rituals',
-      'title': _getLocalizedTitle(context, 'rituals'),
-      'subtitle': '¿Cómo nos organizamos?',
+      'id': 'tools',
+      'title': _getLocalizedTitle(context, 'tools'),
+      'subtitle': '¿Qué herramientas usamos?',
+      'color': Colors.teal.shade400,
+      'icon': Icons.handyman,
+      'description': 'Herramientas, tecnologías y recursos',
+    },
+    {
+      'id': 'network',
+      'title': _getLocalizedTitle(context, 'network'),
+      'subtitle': '¿Con quién nos conectamos?',
       'color': Colors.indigo.shade400,
-      'icon': Icons.event,
-      'description': 'Reuniones, rituales, ceremonias',
+      'icon': Icons.account_tree,
+      'description': 'Red de contactos y conexiones',
+    },
+    {
+      'id': 'values',
+      'title': _getLocalizedTitle(context, 'values'),
+      'subtitle': '¿Qué valores nos guían?',
+      'color': Colors.orange.shade400,
+      'icon': Icons.balance,
+      'description': 'Valores y principios del equipo',
     },
   ];
 
@@ -378,41 +408,72 @@ class _TeamCanvasPageState extends State<TeamCanvasPage> {
   Widget _buildPreviewGrid(BuildContext context, List<Map<String, dynamic>> sections) {
     return Column(
       children: [
-        // Primera fila
+        // Primera fila (2/3 del espacio)
         Expanded(
+          flex: 2,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
+                flex: 2,
                 child: _buildPreviewSection(context, sections[0]), // People
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 4),
               Expanded(
-                child: _buildPreviewSection(context, sections[1]), // Purpose
+                flex: 2,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: _buildPreviewSection(context, sections[1]), // Activities
+                    ),
+                    const SizedBox(height: 4),
+                    Expanded(
+                      child: _buildPreviewSection(context, sections[2]), // Personal Goals
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 4),
               Expanded(
-                child: _buildPreviewSection(context, sections[2]), // Personality
+                flex: 4,
+                child: _buildPreviewSection(context, sections[3]), // Purpose (center, larger)
+              ),
+              const SizedBox(width: 4),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: _buildPreviewSection(context, sections[4]), // Rules
+                    ),
+                    const SizedBox(height: 4),
+                    Expanded(
+                      child: _buildPreviewSection(context, sections[5]), // Skills
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 4),
+              Expanded(
+                flex: 2,
+                child: _buildPreviewSection(context, sections[6]), // Tools
               ),
             ],
           ),
         ),
-        const SizedBox(height: 8),
-        // Segunda fila
+        const SizedBox(height: 4),
+        // Fila inferior (1/3 del espacio)
         Expanded(
+          flex: 1,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: _buildPreviewSection(context, sections[3]), // Rules
+                child: _buildPreviewSection(context, sections[7]), // Network
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 4),
               Expanded(
-                child: _buildPreviewSection(context, sections[4]), // Roles
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _buildPreviewSection(context, sections[5]), // Rituals
+                child: _buildPreviewSection(context, sections[8]), // Values
               ),
             ],
           ),
@@ -426,12 +487,14 @@ class _TeamCanvasPageState extends State<TeamCanvasPage> {
     
     return Column(
       children: [
-        // Primera fila
+        // Primera fila (2/3 del espacio) - Layout similar al BMC
         Expanded(
+          flex: 2,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
+                flex: 2,
                 child: TeamCanvasGridSection(
                   id: sections[0]['id'],
                   title: sections[0]['title'],
@@ -444,38 +507,38 @@ class _TeamCanvasPageState extends State<TeamCanvasPage> {
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: TeamCanvasGridSection(
-                  id: sections[1]['id'],
-                  title: sections[1]['title'],
-                  subtitle: sections[1]['subtitle'],
-                  content: teamCanvas.getContentById(sections[1]['id']),
-                  onContentChanged: (content) => _updateSection(sections[1]['id'], content),
-                  color: sections[1]['color'],
-                  icon: sections[1]['icon'],
+                flex: 2,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: TeamCanvasGridSection(
+                        id: sections[1]['id'],
+                        title: sections[1]['title'],
+                        subtitle: sections[1]['subtitle'],
+                        content: teamCanvas.getContentById(sections[1]['id']),
+                        onContentChanged: (content) => _updateSection(sections[1]['id'], content),
+                        color: sections[1]['color'],
+                        icon: sections[1]['icon'],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Expanded(
+                      child: TeamCanvasGridSection(
+                        id: sections[2]['id'],
+                        title: sections[2]['title'],
+                        subtitle: sections[2]['subtitle'],
+                        content: teamCanvas.getContentById(sections[2]['id']),
+                        onContentChanged: (content) => _updateSection(sections[2]['id'], content),
+                        color: sections[2]['color'],
+                        icon: sections[2]['icon'],
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: TeamCanvasGridSection(
-                  id: sections[2]['id'],
-                  title: sections[2]['title'],
-                  subtitle: sections[2]['subtitle'],
-                  content: teamCanvas.getContentById(sections[2]['id']),
-                  onContentChanged: (content) => _updateSection(sections[2]['id'], content),
-                  color: sections[2]['color'],
-                  icon: sections[2]['icon'],
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 8),
-        // Segunda fila
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
+                flex: 4,
                 child: TeamCanvasGridSection(
                   id: sections[3]['id'],
                   title: sections[3]['title'],
@@ -488,26 +551,79 @@ class _TeamCanvasPageState extends State<TeamCanvasPage> {
               ),
               const SizedBox(width: 8),
               Expanded(
+                flex: 2,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: TeamCanvasGridSection(
+                        id: sections[4]['id'],
+                        title: sections[4]['title'],
+                        subtitle: sections[4]['subtitle'],
+                        content: teamCanvas.getContentById(sections[4]['id']),
+                        onContentChanged: (content) => _updateSection(sections[4]['id'], content),
+                        color: sections[4]['color'],
+                        icon: sections[4]['icon'],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Expanded(
+                      child: TeamCanvasGridSection(
+                        id: sections[5]['id'],
+                        title: sections[5]['title'],
+                        subtitle: sections[5]['subtitle'],
+                        content: teamCanvas.getContentById(sections[5]['id']),
+                        onContentChanged: (content) => _updateSection(sections[5]['id'], content),
+                        color: sections[5]['color'],
+                        icon: sections[5]['icon'],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                flex: 2,
                 child: TeamCanvasGridSection(
-                  id: sections[4]['id'],
-                  title: sections[4]['title'],
-                  subtitle: sections[4]['subtitle'],
-                  content: teamCanvas.getContentById(sections[4]['id']),
-                  onContentChanged: (content) => _updateSection(sections[4]['id'], content),
-                  color: sections[4]['color'],
-                  icon: sections[4]['icon'],
+                  id: sections[6]['id'],
+                  title: sections[6]['title'],
+                  subtitle: sections[6]['subtitle'],
+                  content: teamCanvas.getContentById(sections[6]['id']),
+                  onContentChanged: (content) => _updateSection(sections[6]['id'], content),
+                  color: sections[6]['color'],
+                  icon: sections[6]['icon'],
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        // Fila inferior (1/3 del espacio)
+        Expanded(
+          flex: 1,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: TeamCanvasGridSection(
+                  id: sections[7]['id'],
+                  title: sections[7]['title'],
+                  subtitle: sections[7]['subtitle'],
+                  content: teamCanvas.getContentById(sections[7]['id']),
+                  onContentChanged: (content) => _updateSection(sections[7]['id'], content),
+                  color: sections[7]['color'],
+                  icon: sections[7]['icon'],
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: TeamCanvasGridSection(
-                  id: sections[5]['id'],
-                  title: sections[5]['title'],
-                  subtitle: sections[5]['subtitle'],
-                  content: teamCanvas.getContentById(sections[5]['id']),
-                  onContentChanged: (content) => _updateSection(sections[5]['id'], content),
-                  color: sections[5]['color'],
-                  icon: sections[5]['icon'],
+                  id: sections[8]['id'],
+                  title: sections[8]['title'],
+                  subtitle: sections[8]['subtitle'],
+                  content: teamCanvas.getContentById(sections[8]['id']),
+                  onContentChanged: (content) => _updateSection(sections[8]['id'], content),
+                  color: sections[8]['color'],
+                  icon: sections[8]['icon'],
                 ),
               ),
             ],
